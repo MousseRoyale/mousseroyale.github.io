@@ -16,6 +16,7 @@ tags:
 | **Event** | GPN CTF 2026 |
 | **Category** | Miscellaneous |
 | **Difficulty** | Medium |
+| **Author** | Alkalem |
 
 !!! info "Challenge Description"
     Why do some people care so much about social circles? Let us focus on cuisine and peoples tastes instead. Talk with others about food and in rare cases your culinary circles might intersect.
@@ -287,6 +288,10 @@ That point, 57.4352°N, 6.5961°W, sits on the Isle of Skye. The nearest restaur
     GPNCTF{The Three Chimneys}
     ```
 
-## Notes
+## Notes / lessons
 
 Although, I wasn't playing for the leaderboard, I did challenge this activity in-part because it had no solves and was worth high points. However, I learned that GPN's scoring decays as more teams solve, even retroactively, so going after the highest-value challenges first wasn't the edge I assumed it would be. I had second blood on Culinary Circles at the full 500, and by the end of the event it was down to 119.
+
+## References
+
+- Challenge handout (GPN CTF 2026, *Culinary Circles* by Alkalem): <https://gpn24.ctf.kitctf.de/api/challenges/handout/culinary-circles>

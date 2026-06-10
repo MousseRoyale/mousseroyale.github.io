@@ -251,3 +251,42 @@
 }
 .md-typeset .ctf-index > ul > li[hidden] { display: none; }
 .ctf-empty { color: var(--cv-muted); font-style: italic; }
+
+/* Command Line colouring block - doesn't work how I want it so leaving for now */
+/* --- palette: dark (slate) is the default surface --------------------------- */
+:root,
+[data-md-color-scheme="slate"] {
+  --cmd-name:   var(--md-accent-fg-color, #80deea);  /* command  -> accent (cyan) */
+  --cmd-opt:    #c792ea;                              /* options  -> soft violet   */
+  --cmd-arg:    var(--md-code-fg-color);              /* arguments-> normal code fg */
+  --cmd-num:    #f78c6c;                              /* numbers                    */
+  --cmd-str:    #c3e88d;                              /* strings                    */
+  --cmd-prompt: var(--md-default-fg-color--light);    /* the $ prompt -> dimmed     */
+  --cmd-output: var(--md-default-fg-color--light);    /* program output -> dimmed   */
+}
+ 
+/* --- palette: light (default) ---------------------------------------------- */
+[data-md-color-scheme="default"] {
+  --cmd-name:   var(--md-accent-fg-color, #0097a7);
+  --cmd-opt:    #8e24aa;
+  --cmd-num:    #d84315;
+  --cmd-str:    #2e7d32;
+  --cmd-prompt: var(--md-default-fg-color--light);
+  --cmd-output: var(--md-default-fg-color--light);
+}
+ 
+/* --- the tokens added by command-highlight.js ------------------------------ */
+.highlight .cmd-name { color: var(--cmd-name); font-weight: 600; }
+.highlight .cmd-opt  { color: var(--cmd-opt); }
+.highlight .cmd-arg  { color: var(--cmd-arg); }
+ 
+/* --- tokens Pygments already emits ----------------------------------------- */
+.highlight .gp { color: var(--cmd-prompt); user-select: none; }  /* prompt: not drag-selectable */
+.highlight .go { color: var(--cmd-output); }
+.highlight .m  { color: var(--cmd-num); }
+.highlight .s,
+.highlight .s1,
+.highlight .s2 { color: var(--cmd-str); }
+ 
+/* A builtin (cd, echo, export, ...) as the first word reads as the command. */
+.highlight .nb { color: var(--cmd-name); font-weight: 600; }
