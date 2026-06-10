@@ -17,7 +17,7 @@ tags:
 | **Difficulty** | Easy |
 | **Author** | MisterPine |
 
-> I always feel like cooking is such a chore... You have to chop up all your ingredients, cook them for hours and then make the plating look half-decent. But not with this new machine I got! You just have to put in your recipe (weirdly, the interface calls it a flag...) and it will get cooked for you. It's so easy, even someone with no experience in ~~cooking~~ reverse engineering can do it.
+> I always feel like cooking is such a chore... You have to chop up all your ingredients, cook them for hours and then make the plating look half-decent. But not with this new machine I got! You just have to put in your recipe (weirdly, the interface calls it a flag...) and it will get cooked for you. It's so easy, even someone with no experience in cooking - reverse engineering can do it.
 
 We get a binary that runs your input through a fixed sequence of "cooking" steps and only accepts the one recipe that comes out matching a stored target. Each cooking operation is its own inverse. They each undo themselves. The goal is to "uncook" the stored target in reverse order into the original flag. Uncook the meal, get the ingredients back.
 
