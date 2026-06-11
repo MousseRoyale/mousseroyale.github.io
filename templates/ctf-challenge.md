@@ -7,14 +7,16 @@ tags:
 
 # [ Challenge name ]
 
+## Overview
+
 | | |
 |---|---|
 | **Event** | [ event ] |
 | **Category** | [ category ] |
-| **Points** | [ points ] |
-| **Solves** | [ solves ] |
+| **Difficulty** | [ difficulty ] |
+| **Author** | [ author ] |
 
-## Challenge
+!!! info "Challenge Description"
 
 ## Recon
 

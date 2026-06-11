@@ -24,7 +24,7 @@ tags:
 
 This is a classic sanity check freebie. The **example flag** in the GPN CTF event rulebook is our valid flag.
 
-![The Flag in the Rules](sanity-check/images/flag.png){ .cc-img }
+![The Flag in the Rules](sanity-check/flag.png){ .cc-img }
 
 ## Flag
 

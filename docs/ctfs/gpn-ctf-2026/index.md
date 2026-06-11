@@ -25,6 +25,8 @@ Worth knowing: scoring is dynamic, so a challenge's value decays as more teams s
 
 - [Double Fried](misc/double-fried.md){ data-category="Misc" } — sort the packet capture to find the flag
 
+- [Restaurant Builder](web/restaurant-builder.md){ data-category="Web" } — turn blueprint "types" into a Python eval primitive and exfiltrate the flag via the model schema
+
 - [Sanity Check](misc/sanity-check.md){ data-category="Misc" } — sanity check
 
 </div>
