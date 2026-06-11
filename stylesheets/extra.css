@@ -1,0 +1,299 @@
+:root {
+  --cv-bg:        #1a1b26;
+  --cv-surface:   #1f2335;
+  --cv-surface-2: #16161e;
+  --cv-border:    #2a2e42;
+  --cv-fg:        #c0caf5;
+  --cv-fg-dim:    #9aa5ce;
+  --cv-muted:     #565f89;
+  --cv-cyan:      #7dcfff;
+  --cv-purple:    #bb9af7;
+  --cv-blue:      #7aa2f7;
+  --cv-green:     #9ece6a;
+  --cv-orange:    #ff9e64;
+  --cv-red:       #f7768e;
+}
+
+/* ---- Header layout ---------------------------------------------------- */
+.md-header__title  { display: none; }                       /* SVG logo used instead */
+.md-header__button.md-logo { display: inline-flex !important; } /* always show logo */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg { height: 1.6rem; }
+.md-header__option { margin-left: auto; }                   /* pin search+toggle right */
+
+/* ---- Map the slate scheme onto our palette ---------------------------- */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color:        var(--cv-bg);
+  --md-default-fg-color:        var(--cv-fg);
+  --md-default-fg-color--light: var(--cv-fg-dim);
+  --md-default-fg-color--lighter: var(--cv-muted);
+  --md-primary-fg-color:        var(--cv-surface);
+  --md-accent-fg-color:         var(--cv-cyan);
+  --md-typeset-a-color:         var(--cv-cyan);
+
+  --md-code-bg-color:           var(--cv-surface-2);
+  --md-code-fg-color:           var(--cv-fg);
+
+  /* Pygments token colors -> tokyo-night */
+  --md-code-hl-comment-color:     var(--cv-muted);
+  --md-code-hl-keyword-color:     var(--cv-purple);
+  --md-code-hl-function-color:    var(--cv-blue);
+  --md-code-hl-name-color:        var(--cv-fg);
+  --md-code-hl-string-color:      var(--cv-green);
+  --md-code-hl-number-color:      var(--cv-orange);
+  --md-code-hl-constant-color:    var(--cv-orange);
+  --md-code-hl-operator-color:    var(--cv-cyan);
+  --md-code-hl-punctuation-color: var(--cv-fg-dim);
+  --md-code-hl-variable-color:    var(--cv-orange);
+  --md-code-hl-special-color:     var(--cv-red);
+}
+
+/* ---- Header bar ------------------------------------------------------- */
+.md-header,
+.md-tabs {
+  background-color: var(--cv-surface);
+  border-bottom: 1px solid var(--cv-border);
+}
+
+/* shell session prompt + output */
+.highlight .gp { color: var(--cv-cyan); font-weight: 500; user-select: none; }
+.highlight .go { color: var(--cv-muted); }
+
+/* code block label bar */
+.highlight .filename {
+  background: var(--cv-surface);
+  color: var(--cv-cyan);
+  font-family: var(--md-code-font-family, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--cv-border);
+  border-bottom: none;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+.highlight .filename + .highlight,
+.highlight .filename + pre {
+  border-radius: 0 0 0.3rem 0.3rem;
+}
+
+/* Rounded, bordered code blocks regardless of title */
+.md-typeset pre > code {
+  border-radius: 0.3rem;
+}
+.md-typeset .highlight {
+  border-radius: 0.3rem;
+}
+
+/* ---- Grid cards (used on the homepage + section indexes) -------------- */
+.md-typeset .grid.cards > ul > li {
+  border: 1px solid var(--cv-border);
+  border-radius: 0.4rem;
+  background: var(--cv-surface);
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+.md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--cv-cyan);
+  transform: translateY(-2px);
+}
+
+/* =============================================================
+   Hero terminal (homepage only)
+   ============================================================= */
+.cv-hero {
+  max-width: 760px;
+  margin: 2.5rem auto 1rem;
+}
+.cv-term {
+  background: var(--cv-surface-2);
+  border: 1px solid var(--cv-border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+}
+.cv-term__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  background: var(--cv-surface);
+  border-bottom: 1px solid var(--cv-border);
+}
+.cv-term__dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+.cv-term__dot--r { background: #f7768e; }
+.cv-term__dot--y { background: #e0af68; }
+.cv-term__dot--g { background: #9ece6a; }
+.cv-term__title {
+  flex: 1; text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem; color: var(--cv-muted);
+}
+.cv-term__body {
+  padding: 1.1rem 1.25rem 1.35rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--cv-fg-dim);
+  white-space: pre-wrap;
+}
+.cv-term__body .p  { color: var(--cv-cyan); user-select: none; }   /* prompt $  */
+.cv-term__body .c  { color: var(--cv-fg); }                        /* command   */
+.cv-term__body .o  { color: var(--cv-muted); }                     /* output    */
+.cv-term__body .k  { color: var(--cv-orange); }                    /* dirs      */
+.cv-term__body .acc{ color: var(--cv-green); }                     /* highlight */
+.cv-term__body a   { color: var(--cv-cyan); }
+
+/* blinking cursor */
+.cv-cursor {
+  display: inline-block; width: 8px; height: 1.05em;
+  background: var(--cv-cyan); vertical-align: -0.18em;
+  animation: cv-blink 1.1s steps(1) infinite;
+}
+@keyframes cv-blink { 50% { opacity: 0; } }
+
+.cv-tagline {
+  text-align: center;
+  color: var(--cv-muted);
+  font-size: 0.95rem;
+  margin: 1rem auto 2.5rem;
+  max-width: 620px;
+}
+
+/* Hide the empty H1 area on the hero page for a cleaner look */
+.cv-home .md-content__inner > h1:first-child { display: none; }
+
+/* ---- Interactive homepage terminal ------------------------------------ */
+#cv-term { cursor: text; }
+.cv-term__screen {
+  padding: 1.05rem 1.25rem 1.15rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.86rem;
+  line-height: 1.75;
+  color: var(--cv-fg-dim);
+  min-height: 9.5rem;
+  outline: none;
+}
+.cv-row { white-space: pre-wrap; word-break: break-word; }
+.cv-prompt { color: var(--cv-cyan); user-select: none; }
+.cv-cmd { color: var(--cv-fg); }
+.cv-dir { color: var(--cv-orange); }
+.cv-out { color: var(--cv-muted); }
+.cv-err { color: var(--cv-red); }
+.cv-line { display: flex; align-items: baseline; gap: 0.5ch; }
+.cv-input {
+  flex: 1; min-width: 0;
+  background: transparent; border: none; outline: none;
+  color: var(--cv-fg);
+  font-family: inherit; font-size: inherit;
+  caret-color: var(--cv-cyan); padding: 0;
+}
+
+/* =============================================================
+   Header — prominent name + centred rail (PaperMod-leaning)
+   ============================================================= */
+.md-header__inner,
+.md-tabs__inner {
+  max-width: 61rem;
+  margin-inline: auto;
+}
+.md-header__title { font-size: 1.05rem; }
+.md-header__title .md-header__topic:first-child .md-ellipsis {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.015em;
+}
+/* Top menu: roomier, quieter links that brighten on hover/active */
+.md-tabs__link {
+  font-size: 0.8rem;
+  opacity: 0.78;
+  transition: opacity 120ms ease;
+}
+.md-tabs__link:hover,
+.md-tabs__link--active { opacity: 1; }
+
+/* Light mode: keep the shell prompt readable on the lighter code surface */
+[data-md-color-scheme="default"] {
+  --md-accent-fg-color: #1098ad;
+  --md-typeset-a-color: #0c8599;
+}
+[data-md-color-scheme="default"] .highlight .gp { color: #0c8599; }
+
+/* =============================================================
+   CTF challenge index — search + category filter
+   ============================================================= */
+.ctf-toolbar {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+  margin: 1rem 0 1.2rem;
+}
+.ctf-search {
+  flex: 1 1 14rem; min-width: 0;
+  background: var(--cv-surface-2); color: var(--cv-fg);
+  border: 1px solid var(--cv-border); border-radius: 6px;
+  padding: 0.45rem 0.7rem;
+  font-family: "IBM Plex Mono", monospace; font-size: 0.8rem;
+}
+.ctf-search:focus { outline: none; border-color: var(--cv-cyan); }
+.ctf-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.ctf-chip {
+  font-family: "IBM Plex Mono", monospace; font-size: 0.7rem;
+  color: var(--cv-fg-dim); background: transparent;
+  border: 1px solid var(--cv-border); border-radius: 5px;
+  padding: 0.28rem 0.55rem; cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+.ctf-chip:hover { border-color: var(--cv-cyan); color: var(--cv-cyan); }
+.ctf-chip.on { background: var(--cv-cyan); color: #16161e; border-color: var(--cv-cyan); }
+.md-typeset .ctf-index > ul {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem;
+}
+.md-typeset .ctf-index > ul > li {
+  margin: 0; padding: 0.7rem 0.9rem;
+  border: 1px solid var(--cv-border); border-radius: 0.4rem;
+  background: var(--cv-surface);
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.md-typeset .ctf-index > ul > li:hover {
+  border-color: var(--cv-cyan); transform: translateY(-1px);
+}
+.md-typeset .ctf-index > ul > li[hidden] { display: none; }
+.ctf-empty { color: var(--cv-muted); font-style: italic; }
+
+/* Command Line colouring block - doesn't work how I want it so leaving for now */
+/* --- palette: dark (slate) is the default surface --------------------------- */
+:root,
+[data-md-color-scheme="slate"] {
+  --cmd-name:   var(--md-accent-fg-color, #80deea);  /* command  -> accent (cyan) */
+  --cmd-opt:    #c792ea;                              /* options  -> soft violet   */
+  --cmd-arg:    var(--md-code-fg-color);              /* arguments-> normal code fg */
+  --cmd-num:    #f78c6c;                              /* numbers                    */
+  --cmd-str:    #c3e88d;                              /* strings                    */
+  --cmd-prompt: var(--md-default-fg-color--light);    /* the $ prompt -> dimmed     */
+  --cmd-output: var(--md-default-fg-color--light);    /* program output -> dimmed   */
+}
+ 
+/* --- palette: light (default) ---------------------------------------------- */
+[data-md-color-scheme="default"] {
+  --cmd-name:   var(--md-accent-fg-color, #0097a7);
+  --cmd-opt:    #8e24aa;
+  --cmd-num:    #d84315;
+  --cmd-str:    #2e7d32;
+  --cmd-prompt: var(--md-default-fg-color--light);
+  --cmd-output: var(--md-default-fg-color--light);
+}
+ 
+/* --- the tokens added by command-highlight.js ------------------------------ */
+.highlight .cmd-name { color: var(--cmd-name); font-weight: 600; }
+.highlight .cmd-opt  { color: var(--cmd-opt); }
+.highlight .cmd-arg  { color: var(--cmd-arg); }
+ 
+/* --- tokens Pygments already emits ----------------------------------------- */
+.highlight .gp { color: var(--cmd-prompt); user-select: none; }  /* prompt: not drag-selectable */
+.highlight .go { color: var(--cmd-output); }
+.highlight .m  { color: var(--cmd-num); }
+.highlight .s,
+.highlight .s1,
+.highlight .s2 { color: var(--cmd-str); }
+ 
+/* A builtin (cd, echo, export, ...) as the first word reads as the command. */
+.highlight .nb { color: var(--cmd-name); font-weight: 600; }
