@@ -10,7 +10,7 @@ tags:
 
 ## Overview
 
-|  |  |
+|  |  |I'
 |---|---|
 | **Event** | GPN CTF 2026 |
 | **Category** | Reversing, Introduction |

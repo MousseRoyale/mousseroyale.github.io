@@ -1,6 +1,6 @@
 # CTFs
 
-CTF event writeups. Jeopardy format unless noted otherwise.
+CTF event writeups.
 
 <div class="grid cards" markdown>
 

@@ -22,4 +22,6 @@ Worth knowing: scoring is dynamic, so a challenge's value decays as more teams s
 - [Culinary Circles](misc/culinary-circles.md){ data-category="Misc" } — geolocate nine restaurants, then intersect three circles.
 - [Autocooker](rev/autocooker.md){ data-category="Rev" } — learn the recipe and reverse it to find the flag
 
+- [Sanity Check](misc/sanity-check.md){ data-category="Misc" } — sanity check
+
 </div>
