@@ -16,7 +16,7 @@ hide:
 </div>
 </div>
 
-<p class="cv-tagline">[ tagline ]</p>
+<p class="cv-tagline">A repo for all things cyber — more coming soon.</p>
 
 <div class="grid cards" markdown>
 
@@ -24,7 +24,7 @@ hide:
 
     ---
 
-    [ description ]
+    HTB, THM, and whatever else needs rooting.
 
     [:octicons-arrow-right-24: Browse](writeups/index.md)
 
@@ -32,7 +32,7 @@ hide:
 
     ---
 
-    [ description ]
+    Jeopardy-style events. Flags captured, methods documented.
 
     [:octicons-arrow-right-24: Browse](ctfs/index.md)
 
@@ -40,7 +40,7 @@ hide:
 
     ---
 
-    [ description ]
+    Structured lab exercises and practice environments.
 
     [:octicons-arrow-right-24: Browse](labs/index.md)
 
@@ -48,7 +48,7 @@ hide:
 
     ---
 
-    [ description ]
+    Quick-reference commands for when the brain is offline.
 
     [:octicons-arrow-right-24: Browse](cheatsheets/index.md)
 
@@ -56,7 +56,7 @@ hide:
 
     ---
 
-    [ description ]
+    Concepts broken down until they make sense.
 
     [:octicons-arrow-right-24: Browse](explanations/index.md)
 
@@ -64,7 +64,7 @@ hide:
 
     ---
 
-    [ description ]
+    Browse everything by technique, tool, or category.
 
     [:octicons-arrow-right-24: Browse](tags.md)
 

@@ -14,6 +14,13 @@
   --cv-red:       #f7768e;
 }
 
+/* ---- Header layout ---------------------------------------------------- */
+.md-header__title  { display: none; }                       /* SVG logo used instead */
+.md-header__button.md-logo { display: inline-flex !important; } /* always show logo */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg { height: 1.6rem; }
+.md-header__option { margin-left: auto; }                   /* pin search+toggle right */
+
 /* ---- Map the slate scheme onto our palette ---------------------------- */
 [data-md-color-scheme="slate"] {
   --md-default-bg-color:        var(--cv-bg);

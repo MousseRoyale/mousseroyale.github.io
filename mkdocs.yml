@@ -1,4 +1,4 @@
-site_name: MousseRoyale
+site_name: MousseRoyale - Security Writeups
 site_description: Security writeups, CTFs, labs, cheatsheets and notes.
 site_author: MousseRoyale
 site_url: https://mousseroyale.github.io/
@@ -9,6 +9,8 @@ theme:
   font:
     text: IBM Plex Sans
     code: IBM Plex Mono
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
   icon:
     repo: fontawesome/brands/github
   palette:
@@ -45,6 +47,7 @@ plugins:
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
+  - javascripts/title-link.js
   - javascripts/terminal.js
   - javascripts/clipboard.js
   - javascripts/ctf-filter.js

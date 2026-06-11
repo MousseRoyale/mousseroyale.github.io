@@ -20,11 +20,6 @@ Worth knowing: scoring is dynamic, so a challenge's value decays as more teams s
 <div class="ctf-index" markdown>
 
 - [Culinary Circles](misc/culinary-circles.md){ data-category="Misc" } — geolocate nine restaurants, then intersect three circles.
-
-</div>
-
-<div class="ctf-index" markdown>
-
 - [Autocooker](rev/autocooker.md){ data-category="Rev" } — learn the recipe and reverse it to find the flag
 
 </div>

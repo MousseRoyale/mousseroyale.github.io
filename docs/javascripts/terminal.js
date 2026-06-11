@@ -16,7 +16,7 @@
     tags: "tags/"
   };
 
-  var BIO = "[ bio ]";
+  var BIO = "I poke at things and write down what happens.";
 
   function boot() {
     var screen = document.getElementById("cv-screen");

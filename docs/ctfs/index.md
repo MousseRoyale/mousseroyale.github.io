@@ -1,6 +1,6 @@
 # CTFs
 
-[ intro ]
+CTF event writeups. Jeopardy format unless noted otherwise.
 
 <div class="grid cards" markdown>
 
@@ -8,7 +8,7 @@
 
     ---
 
-    [ short line — format / when ]
+    Jeopardy · June 2026 · Solo
 
     [:octicons-arrow-right-24: View](gpn-ctf-2026/index.md)
 

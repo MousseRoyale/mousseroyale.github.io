@@ -21,8 +21,6 @@ tags:
 
 We get a binary that runs your input through a fixed sequence of "cooking" steps and only accepts the one recipe that comes out matching a stored target. Each cooking operation is its own inverse. They each undo themselves. The goal is to "uncook" the stored target in reverse order into the original flag. Uncook the meal, get the ingredients back.
 
-The whole thing is genuinely beginner-friendly, and it has a feature that makes it even friendlier than the author probably intended. More on that below.
-
 ## Recon
 First question for any binary: what is it, and did they leave the labels on?
 
