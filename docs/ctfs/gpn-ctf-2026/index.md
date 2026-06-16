@@ -1,10 +1,15 @@
 # GPN CTF 2026
 
+??? tip "Incomplete Writeups"
+    This page currently documents a select subset of my solves from this event. Additional writeups may be added retroactively as time permits.
+
 | | |
 |---|---|
 | **Format** | Jeopardy |
-| **Dates** | 05 June, 18:00 AWST — 07 June 2026, 06:00 AWST |
-| **Team** | Solo |
+| **Dates** | 05 June, 10:00 UTC — 06 June 2026, 22:00 UTC |
+| **Team** | Solo (Active for 1 day) |
+| **Placement** | #34 / 650 (Organic / Non-AI Category) |
+| **Total Pool** | 1,131 (All Teams) |
 
 ## Overview
 
