@@ -1,6 +1,8 @@
 # CTFs
 
-CTF event writeups.
+Archive of Capture The Flag event writeups. 
+
+> **My Writeup Philosophy:** To focus on quality over quantity, I document high-value, unique, or complex solves rather than publishing every single challenge.
 
 <div class="grid cards" markdown>
 
