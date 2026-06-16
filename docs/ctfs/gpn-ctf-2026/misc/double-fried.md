@@ -1,9 +1,10 @@
 ---
+description: packet capture with flag delivered char-by-char
 tags:
   - misc
   - network trace analysis
   - wireshark
-  - gpn-ctf-2026    
+  - gpn-ctf-2026
 ---
 
 # Double Fried
@@ -21,7 +22,7 @@ tags:
     I was planning to go to dinner with a friend but somthing felt off.
     Can you help me sort everything out?
 
-The handout ("Takeout Order") was a network trace called `kitchen_log.pcap`. Analysing this in Wireshark providing us some communications with the kitchen, with our flag contained within.
+The handout ("Takeout Order") was a network trace called `kitchen_log.pcap`.
 
 ## Challenge
 

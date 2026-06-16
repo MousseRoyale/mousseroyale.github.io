@@ -1,4 +1,5 @@
 ---
+description: classic sanity-check freebie
 tags:
   - misc
   - gpn-ctf-2026
