@@ -1,4 +1,5 @@
 ---
+description: nine restaurant OSINT images spanning six countries
 tags:
   - misc
   - osint
@@ -22,8 +23,6 @@ tags:
     Why do some people care so much about social circles? Let us focus on cuisine and peoples tastes instead. Talk with others about food and in rare cases your culinary circles might intersect.
     
     **Note:** Use OpenStreetMap as source of truth for the locations and their names. The solution is the location of a restaurant, formatted as flag, e.g., `GPNCTF{The French Laundry}`. Precision may be required.
-
-The handout ("Takeout Order") was nine images, each titled a different name (presumably members of the culinary circle). Each image showed a different restaurant. I solved this challenge by finding all nine, verifying against OpenStreetMap, then used them to find a tenth restaurant where the "culinary circles intersect".
 
 First thing I checked was metadata, but exiftool came up empty on all nine. That's expected for this kind of challenge. After that it was basic OSINT, as shown below.
 

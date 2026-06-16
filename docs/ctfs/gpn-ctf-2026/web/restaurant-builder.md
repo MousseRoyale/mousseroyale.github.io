@@ -1,4 +1,5 @@
 ---
+description: FastAPI service accepting user-defined Pydantic model blueprints
 tags:
   - web
   - rce
@@ -19,7 +20,7 @@ tags:
 !!! info "Challenge Description"
     So you want to build your own restaurant? Well, we obviously can't just let you do that. Please first submit blueprints and exact descriptions for the building, all the furniture and every single item you plan to have in the restaurant.
 
-The challenge also provides us a handout file and allows us to spin up a web instance. We can analyse the handout to understand how to exploit the source for the flag.
+The challenge also provides us a handout file and allows us to spin up a web instance.
 
 ## Recon
 
