@@ -21,14 +21,14 @@ tags:
 > I always feel like cooking is such a chore... You have to chop up all your ingredients, cook them for hours and then make the plating look half-decent. But not with this new machine I got! You just have to put in your recipe (weirdly, the interface calls it a flag...) and it will get cooked for you. It's so easy, even someone with no experience in cooking - reverse engineering can do it.
 
 ## Recon
-First question for any binary: what is it, and did they leave the labels on?
+First question for any binary: what is it?
 
 ```console
 $ file autocooker
 autocooker: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, not stripped
 ```
 
-A normal Linux x86-64 ELF, and crucially **not stripped**. The symbol table is intact, which on a reversing challenge is roughly like handing someone the recipe card and asking them to guess the dish. We'll lean on those names heavily.
+A normal Linux x86-64 ELF, and crucially **not stripped**. This means the devs left the original labels (symbols) intact. On a rev challenge this is like handing someone the recipe card and asking them to guess the dish. We'll lean on those names heavily.
 
 Running it gives a banner, asks for the recipe (flag) and the rejects my text input. 
 

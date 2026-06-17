@@ -39,6 +39,9 @@ theme:
     - content.code.annotate
     - content.tabs.link
 
+hooks:
+  - hooks/autogen.py
+
 plugins:
   - search
   - awesome-nav
@@ -50,6 +53,8 @@ extra_javascript:
   - javascripts/terminal.js
   - javascripts/clipboard.js
   - javascripts/ctf-filter.js
+  - javascripts/ctf-explorer.js
+  - javascripts/challenge-card.js
   - javascripts/title-link.js
   #- javascripts/command-highlight.js
 
@@ -83,6 +88,9 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
