@@ -227,12 +227,25 @@
 [data-md-color-scheme="default"] .md-typeset .grid.cards > ul > li:hover {
   border-color: var(--md-accent-fg-color);
 }
-[data-md-color-scheme="default"] .md-typeset .ctf-index > ul > li {
+[data-md-color-scheme="default"] .md-typeset .ctf-index > ul > li,
+[data-md-color-scheme="default"] .md-typeset .ctf-explorer > ul > li {
   background: var(--md-default-bg-color);
   border-color: rgba(0, 0, 0, 0.12);
 }
-[data-md-color-scheme="default"] .md-typeset .ctf-index > ul > li:hover {
+[data-md-color-scheme="default"] .md-typeset .ctf-index > ul > li:hover,
+[data-md-color-scheme="default"] .md-typeset .ctf-explorer > ul > li:hover {
   border-color: var(--md-accent-fg-color);
+}
+[data-md-color-scheme="default"] .explorer-event-select {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--md-default-fg-color);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+[data-md-color-scheme="default"] .explorer-event-select:focus {
+  border-color: var(--md-accent-fg-color);
+}
+[data-md-color-scheme="default"] .explorer-meta {
+  color: var(--md-default-fg-color--lighter);
 }
 [data-md-color-scheme="default"] .ctf-search {
   background: rgba(0, 0, 0, 0.04);
