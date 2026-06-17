@@ -1,7 +1,15 @@
+---
+ctf_meta:
+  title: GPN CTF 2026
+  date: "2026-06-06"
+  icon: material-flag-checkered
+  subtitle: "Jeopardy · June 2026 · Solo"
+---
+
 # GPN CTF 2026
 
 ??? tip "Incomplete Writeups"
-    This page currently documents a select subset of my solves from this event. Additional writeups may be added retroactively as time permits.
+    This page features a selection of my challenge solves from this event. I may add more writeups retroactively as time permits.
 
 | | |
 |---|---|
@@ -22,16 +30,5 @@ Worth knowing: scoring is dynamic, so a challenge's value decays as more teams s
 
 ## Writeups
 
-<div class="ctf-index" markdown>
-
-- [Autocooker](rev/autocooker.md){ data-category="Rev" } — learn the recipe and reverse it to find the flag
-
-- [Culinary Circles](misc/culinary-circles.md){ data-category="Misc" } — geolocate nine restaurants, then intersect three circles.
-
-- [Double Fried](misc/double-fried.md){ data-category="Misc" } — sort the packet capture to find the flag
-
-- [Restaurant Builder](web/restaurant-builder.md){ data-category="Web" } — turn blueprint "types" into a Python eval primitive and exfiltrate the flag via the model schema
-
-- [Sanity Check](misc/sanity-check.md){ data-category="Misc" } — sanity check
-
-</div>
+<!-- autogen:writeup-list -->
+<!-- /autogen:writeup-list -->

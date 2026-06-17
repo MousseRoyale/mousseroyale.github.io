@@ -26,6 +26,20 @@
       li._cat = a ? a.getAttribute("data-category") : "";
       li._text = (li.textContent || "").toLowerCase();
       if (li._cat && cats.indexOf(li._cat) < 0) cats.push(li._cat);
+
+      if (li._cat) {
+        var tag = document.createElement("span");
+        tag.className = "explorer-meta";
+        tag.textContent = li._cat;
+        li.appendChild(tag);
+      }
+
+      li.style.cursor = "pointer";
+      li.addEventListener("click", function (e) {
+        if (e.target.closest && e.target.closest("a")) return;
+        var link = li.querySelector("a");
+        if (link) link.click();
+      });
     });
     cats.sort();
 
