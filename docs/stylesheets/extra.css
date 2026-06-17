@@ -219,6 +219,43 @@
 }
 [data-md-color-scheme="default"] .highlight .gp { color: #0c8599; }
 
+/* Light mode: grid cards + CTF index items use scheme-aware surfaces */
+[data-md-color-scheme="default"] .md-typeset .grid.cards > ul > li {
+  background: var(--md-default-bg-color);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+[data-md-color-scheme="default"] .md-typeset .grid.cards > ul > li:hover {
+  border-color: var(--md-accent-fg-color);
+}
+[data-md-color-scheme="default"] .md-typeset .ctf-index > ul > li {
+  background: var(--md-default-bg-color);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+[data-md-color-scheme="default"] .md-typeset .ctf-index > ul > li:hover {
+  border-color: var(--md-accent-fg-color);
+}
+[data-md-color-scheme="default"] .ctf-search {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--md-default-fg-color);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+[data-md-color-scheme="default"] .ctf-search:focus {
+  border-color: var(--md-accent-fg-color);
+}
+[data-md-color-scheme="default"] .ctf-chip {
+  color: var(--md-default-fg-color--light);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+[data-md-color-scheme="default"] .ctf-chip:hover {
+  border-color: var(--md-accent-fg-color);
+  color: var(--md-accent-fg-color);
+}
+[data-md-color-scheme="default"] .ctf-chip.on {
+  background: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+  color: #fff;
+}
+
 /* =============================================================
    CTF challenge index — search + category filter
    ============================================================= */
@@ -248,9 +285,10 @@
   list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem;
 }
 .md-typeset .ctf-index > ul > li {
-  margin: 0; padding: 0.7rem 0.9rem;
+  margin: 0; padding: 0.55rem 0.9rem;
   border: 1px solid var(--cv-border); border-radius: 0.4rem;
   background: var(--cv-surface);
+  display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
   transition: border-color 0.12s ease, transform 0.12s ease;
 }
 .md-typeset .ctf-index > ul > li:hover {
@@ -258,6 +296,82 @@
 }
 .md-typeset .ctf-index > ul > li[hidden] { display: none; }
 .ctf-empty { color: var(--cv-muted); font-style: italic; }
+
+/* =============================================================
+   Global challenge explorer (.ctf-explorer on ctfs/index.md)
+   ============================================================= */
+.md-typeset .ctf-explorer > ul {
+  list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem;
+}
+.md-typeset .ctf-explorer > ul > li {
+  margin: 0; padding: 0.55rem 0.9rem;
+  border: 1px solid var(--cv-border); border-radius: 0.4rem;
+  background: var(--cv-surface);
+  display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+.md-typeset .ctf-explorer > ul > li:hover {
+  border-color: var(--cv-cyan); transform: translateY(-1px);
+}
+.md-typeset .ctf-explorer > ul > li[hidden] { display: none; }
+
+/* "Category · Event" label appended to each explorer item */
+.explorer-meta {
+  flex-shrink: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--cv-muted);
+  white-space: nowrap;
+}
+
+/* Toolbar top row: search + event dropdown side by side */
+.explorer-top-row {
+  display: flex; gap: 0.5rem; width: 100%;
+}
+.explorer-top-row .ctf-search { flex: 1; }
+.explorer-event-select {
+  background: var(--cv-surface-2); color: var(--cv-fg);
+  border: 1px solid var(--cv-border); border-radius: 6px;
+  padding: 0.45rem 0.55rem;
+  font-family: "IBM Plex Mono", monospace; font-size: 0.8rem;
+  cursor: pointer;
+}
+.explorer-event-select:focus { outline: none; border-color: var(--cv-cyan); }
+
+/* =============================================================
+   Challenge title card (replaces Overview table on challenge pages)
+   ============================================================= */
+.challenge-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  padding: 0.65rem 1rem;
+  background: var(--cv-surface);
+  border: 1px solid var(--cv-border);
+  border-left: 3px solid var(--cv-cyan);
+  border-radius: 0.4rem;
+  margin: 0.4rem 0 1.4rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.challenge-card__item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.challenge-card__key {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  color: var(--cv-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.challenge-card__val { color: var(--cv-fg); }
+.challenge-card__sep {
+  color: var(--cv-border);
+  font-size: 0.75rem;
+}
 
 /* Command Line colouring block - doesn't work how I want it so leaving for now */
 /* --- palette: dark (slate) is the default surface --------------------------- */
