@@ -34,9 +34,10 @@ The video looks like ordinary **Super Mario 64** gameplay (with *Mushroom Kingdo
 
 SM64 is a Nintendo game, not designed for PlayStation, so the controller is deliberately wrong. As stated in the description, this challenge has nothing to do with YouTube or video forensics. I checked the file, channel and description first out of habit and found nothing, so the video is only a carrier for the inputs.
 
-The only thing carrying meaningful information is the sequence of button presses, plus some occasional glitches in the game video and audio (which didn't seem to really help me for this solve). These inputs don't drive Mario (they aren't linked to the gameplay), and they arrive in bursts separated by either long or short pauses.
+The only thing carrying meaningful information is the sequence of button presses, plus some occasional glitches in the game video and audio.
+I felt these glitches were important as they were obviously intentional but I could figure out the meaning in my final solution (read after the flag for the authors much more straightforward intended pathway below). 
 
-I needed to treat this input stream as an encoded message, accounting for the pauses, and work out whether each group mapped to a letter or a word.
+These inputs don't drive Mario (they aren't linked to the gameplay), and they arrive in bursts separated by either long or short pauses. I needed to treat this input stream as an encoded message, accounting for the pauses, and work out whether each group mapped to a letter or a word.
 
 ## Solution
 
@@ -211,9 +212,15 @@ The decoded phrase is the punchline too: every press in the video was scripted. 
     boroCTF{controlled inputs}
     ```
 
+## Post Addendum - What the glitches were actually for
+
+Instead of using cryptanalysis to find P2 to Talk, the glitches were actually indicators all along. The challenge author **Franklin** read through this writeup and confirmed that most people wouldn't recognise petscop and thats where the glitches come into play.
+
+Each glitch is followed by Mario moving in the shape of a letter. I went back and verified that and sure enough Mario spelled out **P E T S C O P**.  Searching **"player 2 petscop controller"** or **"player 2 petscop inputs"** turns up this very writeup quickly, since both the challenge's own internal logic and its name point at the same term from two different directions. This would've allowed me to breeze through steps 2 and 3 and quickly identify the system.
+
 ## Notes
 
-- Most of the difficulty in this challenge was identifying what type of system would lead me to my answer. Once I knew it was **P2 to TALK** the rest is easy. 
+- Most of the difficulty in this challenge was identifying what type of system would lead me to my answer. Once I knew it was **P2 to TALK** the rest is easy. This part would've been clear if I picked up on the glitches intended meaning.
 - Without reading into the possibilities and clues of the outcomes, I would've wasted a lot of time on dead-ends. Recognising how the input combinations group together, the possibilities that it could map to and the flag length / prefix requirements all made 
 this possible to identify that a phonetic cipher was possible.
 - I possibly could have solved this much quicker if I had connected "Player 2" = P2 on my own.
