@@ -22,9 +22,9 @@ tags:
 
 The challenge provides the server source as a handout and a live SSL instance to connect to via `ncat --ssl`. Rock-paper-scissors against a server, 100 rounds straight. The catch is that you have to commit to your move before seeing the server's pick, then prove the commitment was honest.
 
-## Reading the source
+## Recon
 
-With `main.py` in hand the protocol is clear. Each round you send a commitment, the server picks and reveals its move, then you reveal your move and prove the commitment was genuine. The server calls `verify` to check:
+With `main.py` in hand I can see the logic to the protocol. For each of the 100 rounds you send a commitment, the server picks and reveals its move, then you reveal your move and prove the commitment was genuine. The server calls `verify` to check:
 
 ```python
 def verify(commitment: bytes, message: bytes, unveil_info: tuple[bytes, bytes]) -> bool:
@@ -95,7 +95,7 @@ import socket
 import ssl
 from hashlib import sha256
 
-HOST = "..."
+HOST = "flash-fried-risotto-marinated-in-sauced-tapenade-5uwi.gpn24.ctf.kitctf.de"
 PORT = 443
 
 context = ssl.create_default_context()
@@ -174,3 +174,4 @@ How can that be? Well, a deal is a deal. Here is your flag: GPNCTF{WaIT, It'S n0
 - Wikipedia, *Commitment scheme*: <https://en.wikipedia.org/wiki/Commitment_scheme>
 
 [^binding]: Boneh & Shoup, *A Graduate Course in Applied Cryptography*, Chapter 12. A commitment scheme is *binding* if no PPT adversary can produce two valid openings for the same commitment: <https://toc.cryptobook.us/>
+
