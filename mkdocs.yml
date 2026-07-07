@@ -56,6 +56,7 @@ extra_javascript:
   - javascripts/ctf-explorer.js
   - javascripts/challenge-card.js
   - javascripts/title-link.js
+  - javascripts/external-links.js
   #- javascripts/command-highlight.js
 
 markdown_extensions:
