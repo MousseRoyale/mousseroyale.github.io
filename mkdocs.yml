@@ -57,6 +57,8 @@ extra_javascript:
   - javascripts/challenge-card.js
   - javascripts/title-link.js
   - javascripts/external-links.js
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
   #- javascripts/command-highlight.js
 
 markdown_extensions:
@@ -92,6 +94,8 @@ markdown_extensions:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
