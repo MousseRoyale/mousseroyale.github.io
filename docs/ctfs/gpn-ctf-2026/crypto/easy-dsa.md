@@ -266,7 +266,7 @@ Standard float LLL fails here: Gram-Schmidt inner products hit \(n^2 \approx 2^{
 
 The server generates a fresh key pair per TCP connection. Collecting signatures in one session and submitting from another always fails. I confirmed this by running the collection step twice against the same instance and getting completely different public keys each time.
 
-Sagecell doesn't work for the full exploit either since it can't connect to the live server. I used it to verify the lattice math on pre-collected signatures and confirm `d` was recoverable, but the TCP connection dies between collection and the Sagecell call, so the forge step always fails. Sage needs to run locally as a subprocess while the Python session keeps the connection open.
+[Sagecell](https://sagecell.sagemath.org/) doesn't work for the full exploit either since it can't connect to the live server. I used it to verify the lattice math on pre-collected signatures and confirm `d` was recoverable, but the TCP connection dies between collection and the Sagecell call, so the forge step always fails. Sage needs to run locally as a subprocess while the Python session keeps the connection open.
 
 ### Pitfall 2: sign ambiguity in LLL output
 
