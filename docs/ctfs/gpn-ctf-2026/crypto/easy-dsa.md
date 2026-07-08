@@ -276,7 +276,7 @@ The fix: verify against a known signature equation. If \(d\) is correct, then \(
 
 ### solve_lattice.py
 
-One connection: collects four signatures, calls `sage -c "..."` as a subprocess while the socket stays open, then forges and submits. Needs sage in PATH (`sudo apt install sagemath` on Kali, or `conda activate sage`):
+One connection: collects four signatures, calls `sage -c "..."` as a subprocess while the socket stays open, then forges and submits. Needs sage in PATH (I used `conda activate sage` in WSL):
 
 ```python title="solve_lattice.py"
 #!/usr/bin/env python3
