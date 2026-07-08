@@ -8,9 +8,6 @@ ctf_meta:
 
 # GPN CTF 2026
 
-??? tip "Incomplete Writeups"
-    This page features a selection of my challenge solves from this event. I may add more writeups retroactively as time permits.
-
 | | |
 |---|---|
 | **Format** | Jeopardy |
