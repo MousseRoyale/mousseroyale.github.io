@@ -227,6 +227,7 @@ this possible to identify that a phonetic cipher was possible.
 - Knowing the answer starts with `boroctf` let me confirm that I was on the right track. 
 - Homophones could've caused issues as words are phonetic. Sequence 3 (`R-I-T`, /raɪt/) could be right, rite or wright. This means that line could've started with either R or W
 - The two easiest tells, both readable straight off the input stream with no prior knowledge, were the **shoulder prefix rule** and the **pause distinctions** between inputs.
+- I wasn't familiar with Petscop before this challenge. It's a pretty cool rabbit hole to go down.
 
 ## References
 
