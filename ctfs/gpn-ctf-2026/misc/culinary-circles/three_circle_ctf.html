@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Three-Circle CTF — Find the Intersection</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  html,body{margin:0;height:100%;font-family:system-ui,Segoe UI,Roboto,sans-serif}
+  #map{position:absolute;top:0;left:0;right:0;bottom:0}
+  #panel{position:absolute;z-index:1000;top:12px;left:12px;background:#fff;
+    padding:14px 16px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.25);max-width:280px}
+  #panel h2{margin:0 0 8px;font-size:16px}
+  .row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:13px}
+  .sw{width:14px;height:14px;border-radius:50%;flex:0 0 auto}
+  .ans{margin-top:10px;padding:8px;background:#fff4e5;border:1px solid #ffb866;
+    border-radius:6px;font-size:13px}
+  label{cursor:pointer}
+</style>
+</head>
+<body>
+<div id="panel">
+  <h2>Three-Circle Intersection</h2>
+  <div class="row"><input type="checkbox" id="cA" checked><span class="sw" style="background:#e6194b"></span><label for="cA">Circle A (Hofu, Peppermill, Kippe 23)</label></div>
+  <div class="row"><input type="checkbox" id="cB" checked><span class="sw" style="background:#3cb44b"></span><label for="cB">Circle B (BCHEF, Belém, Westersingel)</label></div>
+  <div class="row"><input type="checkbox" id="cC" checked><span class="sw" style="background:#4363d8"></span><label for="cC">Circle C (Skeppsbro, Tastebuds, C. Marina)</label></div>
+  <div class="ans"><b>Intersection:</b><br>57.4352&deg;N, 6.5961&deg;W<br><i>Isle of Skye, Scotland</i></div>
+</div>
+<div id="map"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+const groups = {
+  A:{color:"#e6194b",pts:[[55.456927,12.178578,"Hofu (DK)"],[52.861685,-8.198295,"Peppermill (IE)"],[49.007485,8.419360,"Kippe 23 (DE)"]]},
+  B:{color:"#3cb44b",pts:[[47.322683,5.038170,"BCHEF (FR)"],[38.697158,-9.202171,"Bel\u00e9m (PT)"],[51.995570,4.475775,"Westersingel (NL)"]]},
+  C:{color:"#4363d8",pts:[[59.324842,18.076136,"Skeppsbro (SE)"],[55.898263,-3.702635,"Tastebuds (SCO)"],[54.899430,9.795497,"Cafe Marina (DK)"]]}
+};
+
+// --- spherical helpers ---
+const D2R=Math.PI/180, R2D=180/Math.PI;
+function toVec(lat,lon){lat*=D2R;lon*=D2R;return [Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)];}
+function toLL(v){const n=Math.hypot(...v);v=v.map(x=>x/n);return [Math.asin(v[2])*R2D,Math.atan2(v[1],v[0])*R2D];}
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const norm=a=>{const n=Math.hypot(...a);return a.map(x=>x/n);};
+
+// small circle through 3 points -> polyline of lat/lon
+function smallCircle(p){
+  const v=p.map(q=>toVec(q[0],q[1]));
+  let n=norm(cross(sub(v[1],v[0]),sub(v[2],v[0])));
+  let axis = dot(n,v[0])>0 ? n : n.map(x=>-x);
+  const c=dot(axis,v[0]);                 // cos(angular radius)
+  const th=Math.acos(Math.max(-1,Math.min(1,c)));
+  // build orthonormal frame around axis
+  let u = Math.abs(axis[2])<0.9 ? cross(axis,[0,0,1]) : cross(axis,[1,0,0]);
+  u=norm(u); const w=cross(axis,u);
+  const out=[];
+  for(let i=0;i<=360;i+=2){
+    const f=i*D2R;
+    const P=[ Math.cos(th)*axis[0]+Math.sin(th)*(Math.cos(f)*u[0]+Math.sin(f)*w[0]),
+              Math.cos(th)*axis[1]+Math.sin(th)*(Math.cos(f)*u[1]+Math.sin(f)*w[1]),
+              Math.cos(th)*axis[2]+Math.sin(th)*(Math.cos(f)*u[2]+Math.sin(f)*w[2]) ];
+    out.push(toLL(P));
+  }
+  return out;
+}
+
+const map=L.map("map",{zoomControl:false}).setView([54,2],4);
+L.control.zoom({position:"topright"}).addTo(map);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {maxZoom:18,attribution:"&copy; OpenStreetMap"}).addTo(map);
+
+const layers={};
+for(const k in groups){
+  const g=groups[k];
+  const lg=L.layerGroup().addTo(map);
+  // circle rim — split into segments so the polyline doesn't jump across the antimeridian
+  let seg=[]; const ring=smallCircle(g.pts);
+  for(let i=0;i<ring.length;i++){
+    if(i>0 && Math.abs(ring[i][1]-ring[i-1][1])>180){
+      L.polyline(seg,{color:g.color,weight:2.5}).addTo(lg); seg=[];
+    }
+    seg.push(ring[i]);
+  }
+  if(seg.length)L.polyline(seg,{color:g.color,weight:2.5}).addTo(lg);
+  // the 3 restaurant points
+  g.pts.forEach(p=>L.circleMarker([p[0],p[1]],
+    {radius:6,color:"#000",weight:1,fillColor:g.color,fillOpacity:1})
+    .bindTooltip(p[2]).addTo(lg));
+  layers[k]=lg;
+}
+
+// intersection marker
+L.marker([57.4352,-6.5961]).addTo(map)
+  .bindPopup("<b>FLAG</b><br>57.4352&deg;N, 6.5961&deg;W<br>Isle of Skye").openPopup();
+
+["A","B","C"].forEach(k=>{
+  document.getElementById("c"+k).addEventListener("change",e=>{
+    e.target.checked?layers[k].addTo(map):map.removeLayer(layers[k]);
+  });
+});
+</script>
+</body>
+</html>
