@@ -8,11 +8,7 @@
 
   // section name -> relative URL (works at site root or under a subpath)
   var ROUTES = {
-    writeups: "writeups/",
     ctfs: "ctfs/",
-    labs: "labs/",
-    cheatsheets: "cheatsheets/",
-    explanations: "explanations/",
     tags: "tags/"
   };
 
@@ -80,7 +76,7 @@
       if (name === "help") {
         print("available commands:", "cv-out");
         print("  ls                list sections", "cv-out");
-        print("  cd <section>      open a section  (e.g. cd writeups)", "cv-out");
+        print("  cd <section>      open a section  (e.g. cd ctfs)", "cv-out");
         print("  cat about.txt     print bio", "cv-out");
         print("  whoami            who am i", "cv-out");
         print("  tags              browse by tag", "cv-out");
@@ -89,9 +85,7 @@
         print("tip: you can also just type a section name and press enter.", "cv-out");
       } else if (name === "ls" || name === "ll" || name === "dir") {
         printHTML(
-          '<span class="cv-dir">writeups/</span>  <span class="cv-dir">ctfs/</span>  ' +
-          '<span class="cv-dir">labs/</span>  <span class="cv-dir">cheatsheets/</span>  ' +
-          '<span class="cv-dir">explanations/</span>  <span class="cv-dir">tags/</span>'
+          '<span class="cv-dir">ctfs/</span>  <span class="cv-dir">tags/</span>'
         );
       } else if (name === "cd" || name === "open" || name === "go") {
         if (!arg || arg === "~" || arg === "." || arg === "..") {

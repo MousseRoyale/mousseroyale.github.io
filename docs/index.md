@@ -16,17 +16,9 @@ hide:
 </div>
 </div>
 
-<p class="cv-tagline">A repo for all things cyber — more coming soon.</p>
+<p class="cv-tagline">A repo for all things cyber.</p>
 
 <div class="grid cards" markdown>
-
--   :material-file-document-edit: __Writeups__
-
-    ---
-
-    HTB, THM, and whatever else needs rooting.
-
-    [:octicons-arrow-right-24: Browse](writeups/index.md)
 
 -   :material-flag-checkered: __CTFs__
 
@@ -35,30 +27,6 @@ hide:
     Jeopardy-style events. Flags captured, methods documented.
 
     [:octicons-arrow-right-24: Browse](ctfs/index.md)
-
--   :material-flask: __Labs__
-
-    ---
-
-    Structured lab exercises and practice environments.
-
-    [:octicons-arrow-right-24: Browse](labs/index.md)
-
--   :material-card-text: __Cheatsheets__
-
-    ---
-
-    Quick-reference commands for when the brain is offline.
-
-    [:octicons-arrow-right-24: Browse](cheatsheets/index.md)
-
--   :material-book-open-variant: __Explanations__
-
-    ---
-
-    Concepts broken down until they make sense.
-
-    [:octicons-arrow-right-24: Browse](explanations/index.md)
 
 -   :material-tag-multiple: __Tags__
 

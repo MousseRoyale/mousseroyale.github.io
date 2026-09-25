@@ -39,6 +39,14 @@ theme:
     - content.code.annotate
     - content.tabs.link
 
+# Sections with no content yet. Remove a line here and add it back to
+# docs/.nav.yml, docs/index.md and javascripts/terminal.js to re-enable.
+exclude_docs: |
+  writeups/
+  labs/
+  cheatsheets/
+  explanations/
+
 hooks:
   - hooks/autogen.py
 
