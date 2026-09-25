@@ -1,8 +1,4 @@
 nav:
   - index.md
-  - Writeups: writeups
   - CTFs: ctfs
-  - Labs: labs
-  - Cheatsheets: cheatsheets
-  - Explanations: explanations
   - tags.md

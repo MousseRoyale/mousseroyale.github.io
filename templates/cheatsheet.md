@@ -6,7 +6,7 @@ tags:
 
 # [ Tool ] cheatsheet
 
-Short reference layout. Keep entries terse — this page is a template showing the format.
+Keep entries terse.
 
 ## [ Category one ]
 

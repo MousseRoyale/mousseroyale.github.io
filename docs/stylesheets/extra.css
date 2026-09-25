@@ -424,3 +424,5 @@
  
 /* A builtin (cd, echo, export, ...) as the first word reads as the command. */
 .highlight .nb { color: var(--cmd-name); font-weight: 600; }
+/* Hide Material's auto "Home" title on the landing page */
+.md-typeset:has(.cv-hero) > h1:first-child { display: none; }
