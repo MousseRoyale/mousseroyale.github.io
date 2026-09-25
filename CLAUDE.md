@@ -180,3 +180,10 @@ The shared utilities (`_read_frontmatter`, `_read_first_h1`, `_inject`) are avai
 | `new-writeup.md`      | New machine writeup (HTB/THM) |
 
 Copy the relevant template into the correct `docs/` subdirectory and fill in the placeholders.
+
+---
+
+## Git
+
+- Commits are authored and committed as `MousseRoyale <jessemeyer1710@gmail.com>`.
+- No `Co-Authored-By` or other AI attribution trailers in commit messages or PR bodies.
