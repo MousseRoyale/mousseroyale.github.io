@@ -57,6 +57,7 @@ CATEGORY_DISPLAY: dict[str, str] = {
     "ppc":        "PPC",
     "network":    "Network",
     "jail":       "Jail",
+    "ai":         "AI",
 }
 
 # Maps folder name → human title written into auto-created .nav.yml files
@@ -73,6 +74,7 @@ CATEGORY_NAV_TITLE: dict[str, str] = {
     "mobile":     "Mobile",
     "stego":      "Steganography",
     "ppc":        "PPC / Programming",
+    "ai":         "AI / ML Security",
     "network":    "Network",
     "jail":       "Jail / Sandbox",
 }
