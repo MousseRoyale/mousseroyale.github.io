@@ -175,9 +175,11 @@ Afterwards I folded the whole thing into a single `solve.py`: the pure-Python re
 - Never build a MAC as `H(secret || message)`. It is length-extension-vulnerable for every Merkle-Damgard hash (MD5, SHA-1, SHA-256, SHA-512). Use HMAC, or a hash whose output is not its full internal state.
 - Not knowing the secret's exact length is not a real obstacle when the verifier will tell you whether a signature is good. The endpoint is its own oracle, and a plausible secret length is a tiny search space.
 - Check how the receiver parses a delimited body for duplicate keys. "Last value wins" is the naive default, and it is exactly what makes an appended `&role=owner` override work once forgery is on the table.
+- Another team's writeup for the same challenge went basically the same way: their own resumable SHA-256 in Python and a brute force over the secret length against the endpoint.[^tinhatinh] Their instance had a 15 byte secret instead of my 14, and they point out a nice self-check: the length field at the end of the glue padding encodes the total bit length, so you can read the winning secret length straight back out of it.
 - `hash_extender` and `HashPump`/`hashpumpy` automate this end to end. Rolling my own was quick and let me self-test against `hashlib` first, but the tools would have gotten the same forged pair.
 
 ## References
 
 [^hashextender]: Ron Bowes, `hash_extender` (hash length extension for MD4/MD5/SHA-1/SHA-256/SHA-512, etc.): <https://github.com/iagox86/hash_extender>
 [^hashpump]: bwall, `HashPump` (and the `hashpumpy` Python bindings): <https://github.com/bwall/HashPump>
+[^tinhatinh]: tinhatinh, CTFWU, H7CTF 2026 Quals / owners-draw: <https://github.com/tinhatinh/CTFWU/tree/main/H7CTF%202026%20Quals/owners-draw>
