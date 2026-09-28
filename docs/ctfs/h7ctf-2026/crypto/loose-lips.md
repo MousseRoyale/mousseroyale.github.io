@@ -19,7 +19,6 @@ tags:
 | **Event** | H7CTF 2026 Quals |
 | **Category** | Crypto |
 | **Difficulty** | Hard |
-| **Author** | Abu |
 
 !!! info "Challenge Description"
     DecryptoStat crunches the numbers without ever peeking at your data, or so the pitch deck promises. The original service still hums along beside the hardened rewrite that was meant to make it behave.
