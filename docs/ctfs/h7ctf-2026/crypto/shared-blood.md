@@ -121,7 +121,7 @@ token = PKCS1_v1_5.new(key).decrypt(bytes.fromhex(captured["ciphertext"]), senti
 # -> b'vlt_7575844924112f8654e055e4'
 ```
 
-The decrypted provisioning payload is the admin bootstrap token, `vlt_7575844924112f8654e055e4` (a throwaway per-instance value, redact if you regenerate the challenge). Redeeming it is the last step:
+The decrypted provisioning payload is the admin bootstrap token, `vlt_7575844924112f8654e055e4`. Redeeming it is the last step:
 
 ```text
 POST /admin {"token": "vlt_7575844924112f8654e055e4"}
