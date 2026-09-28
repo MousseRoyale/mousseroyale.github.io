@@ -32,7 +32,7 @@ Before touching SSH I curled the external HTTP port. The first request gave me a
 
 Reading the app source later explained why. It keeps a single shared session token in server memory (`_active_token`), not one per cookie, so the very first hit from anywhere locks the whole thing. Once it's locked there's nothing I can drive from the outside.
 
-So I left it alone. It wasn't reachable in any useful state, and the description keeps pointing me back at the internal app, so this wasn't going to be my way in. I flagged it as either a deliberate decoy or possibly an unintended exposure, but I never actually confirmed which, so I'm not going to pretend I know. Either way it had nothing to do with how I got root below.
+So I left it alone. It wasn't reachable in any useful state, and the description keeps pointing me back at the internal app, so this wasn't going to be my way in. I'm not sure if there was a deliberate decoy or unintended exposure but either way it had nothing to do with how I got root below.
 
 ### SSH enumeration
 
