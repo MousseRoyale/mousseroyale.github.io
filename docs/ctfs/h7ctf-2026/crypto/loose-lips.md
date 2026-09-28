@@ -76,7 +76,7 @@ DELTA = 1 << 25              # scale
 
 `Q = 2^40 - 87` is the `1099511627689` from the landing page and `DELTA = 2^25` is the `33554432`.
 
-"The service returns the approximate (noisy) decryption" is the exact precondition for the **Li-Micciancio attack** from "On the Security of Homomorphic Encryption on Approximate Numbers" (Eurocrypt 2021).[^lm] $HOW_I_CONNECTED_IT_TO_LI_MICCIANCIO. That paper showed that in CKKS, a decryption result plus the ciphertext it came from is enough to recover the secret key, and they did it against real libraries (HEAAN, SEAL, HElib, PALISADE). It's also why they proposed a stronger security notion, IND-CPA\(^D\), where the attacker is allowed to see decryption results. v2's "noise flooding" is the standard countermeasure that came out of that line of work, so the second half of the challenge is really about whether it was deployed properly.
+"The service returns the approximate (noisy) decryption" is the exact precondition for the **Li-Micciancio attack** from "On the Security of Homomorphic Encryption on Approximate Numbers" (Eurocrypt 2021).[^lm] The handout comment is pretty much the abstract of that paper. It showed that in CKKS, a decryption result plus the ciphertext it came from is enough to recover the secret key, and they did it against real libraries (HEAAN, SEAL, HElib, PALISADE). It's also why they proposed a stronger security notion, IND-CPA\(^D\), where the attacker is allowed to see decryption results. v2's "noise flooding" is the standard countermeasure that came out of that line of work, so the second half of the challenge is really about whether it was deployed properly.
 
 ## Background: how CKKS works
 
@@ -162,6 +162,8 @@ The key observation is that \(d = b + a s\) isn't an approximation of anything. 
 1. `encode(returned_slots)` rebuilds the **exact** integer polynomial \(d = b + a s\), not just the rounded message.
 2. \(y = d - b \pmod Q\) is exactly \(a \cdot s\).
 3. Multiplying by a known \(a\) is linear in \(s\), so this is just a linear system mod \(Q\) with 8 unknowns and 8 equations.
+
+In ring terms that's just \(s = (d - b) \cdot a^{-1}\), which is how the Li-Micciancio paper writes it. The matrix below is the concrete way to do that division when the ring is \(x^N + 1\).
 
 The ciphertext \((b, a)\) is handed out by the encrypt endpoint anyway, so one encrypt plus one decrypt is everything needed.
 
@@ -346,7 +348,7 @@ H7CTF{a2a5058f-a82a-49f5-81f0-587f95e3b1f7}
 
 ### How it's supposed to be done
 
-For comparison, OpenFHE ships CKKS noise flooding as an actual decryption mode, and its docs make you pick the number of adversarial decryption queries you expect up front (along with a statistical security level). The flood's standard deviation is then sized from that.[^openfhe] Later work quantifies the same trade-off between flood size, number of allowed decryptions before the keys get refreshed, and concrete security.[^bergamaschi] v2 has neither side of that: the flood is about the size of the encryption noise and there's no limit on how many times one ciphertext can be decrypted.
+For comparison, OpenFHE ships CKKS noise flooding as an actual decryption mode, and its docs make you pick the number of adversarial decryption queries you expect up front (along with a statistical security level). The flood's standard deviation is then sized from that.[^openfhe] Later work quantifies the same trade-off between flood size, number of allowed decryptions before the keys get refreshed, and concrete security.[^bergamaschi] Guo et al. go further and show that even flooding sized from *average case* noise estimates (instead of worst case) can be broken on OpenFHE from a single shared decryption, which is a much stronger attack than the plain averaging needed here.[^guo] v2 has neither side of that: the flood is about the size of the encryption noise and there's no limit on how many times one ciphertext can be decrypted.
 
 ## Cleaning it up
 
@@ -379,3 +381,4 @@ Once both flags were in, I tidied everything into one `solve.py`: the CKKS encod
 [^lm]: Baiyu Li and Daniele Micciancio, "On the Security of Homomorphic Encryption on Approximate Numbers", Eurocrypt 2021, IACR ePrint 2020/1533: <https://eprint.iacr.org/2020/1533>
 [^openfhe]: OpenFHE, "CKKS Noise Flooding" (example docs): <https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/CKKS_NOISE_FLOODING.md>
 [^bergamaschi]: Flavio Bergamaschi, Anamaria Costache, Dana Dachman-Soled, Hunter Kippen, Lucas LaBuff and Rui Tang, "Revisiting the Security of Approximate FHE with Noise-Flooding Countermeasures", PKC 2025, IACR ePrint 2024/424: <https://eprint.iacr.org/2024/424>
+[^guo]: Qian Guo, Denis Nabokov, Elias Suvanto and Thomas Johansson, "Key Recovery Attacks on Approximate Homomorphic Encryption with Non-Worst-Case Noise Flooding Countermeasures", USENIX Security 2024: <https://www.usenix.org/conference/usenixsecurity24/presentation/guo-qian>
