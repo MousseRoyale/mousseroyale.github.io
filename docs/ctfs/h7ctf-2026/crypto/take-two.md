@@ -172,7 +172,18 @@ I recompute each filler's digits locally with `lms.py`'s own `msg_digits`, so I 
 
 ### How many samples
 
-The message digits are nibbles of a SHA-256 digest, so they are basically uniform over 0 to 15. A position is only a problem if the target digit there is low and no sample ever came in at or below it. Worst case is a target digit of 0, which needs an exact 0 from some sample, probability `1/16` each. Over `K` samples the chance a given zero-target position is never covered is `(15/16)^K`. At `K = 300` that is about `7e-9` per position, and only a handful of positions have a target digit that low, so 300 is comfortable overkill. I ran 300.
+The 64 message digits are nibbles of a SHA-256 digest, so they are basically uniform over 0 to 15. A position is only a problem if the target digit there is low and no sample ever came in at or below it. Worst case is a target digit of 0, which needs an exact 0 from some sample, probability `1/16` each. Over `K` samples the chance a given zero-target position is never covered is `(15/16)^K`, which at `K = 300` is about `7e-9`.
+
+The 3 checksum digits don't follow that rule. The checksum is `sum(15 - d_i)` over 64 digits, so it sits around 480 and its top digit (`c >> 8`) is almost always 1 or 2. Those positions just have a narrow range instead of a uniform one, and for them what matters is how the target's checksum digits compare with typical samples.
+
+For the actual target, `BACKDOOR unlock console v1`, the digits work out like this (checked afterwards by running `msg_digits` from `lms.py`):
+
+| | |
+|---|---|
+| Message positions with target digit 0 | 3 (positions 7, 51, 61) |
+| Checksum digits | `1, 12, 4` |
+
+The top checksum digit being 1 means I need at least one sample whose checksum is under 512, which is common. Simulating the collection offline with `lms.py` and random filler builds, a full set of covering samples usually shows up after about 25 signatures, and in 200 runs the worst case needed 110. So 300 was comfortable overkill. I ran 300.
 
 ## Forging the target
 
