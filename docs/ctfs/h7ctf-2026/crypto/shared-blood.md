@@ -30,7 +30,7 @@ No files came with this one. Everything lived on a running service, so the first
 
 ## Recon
 
-The landing page is a tiny HTML stub: a "VoltEye Camera Cloud" heading, a line saying admin bootstrap is required, a paragraph listing the API, and an unlock form that POSTs a token to `/admin`. The three endpoints it documents are the whole game:
+The landing page is a tiny HTML stub: a "VoltEye Camera Cloud" heading, a line saying admin bootstrap is required, a paragraph listing the API, and an unlock form that POSTs a token to `/admin`. It documents three endpoints:
 
 | Endpoint | What it returns |
 |---|---|
@@ -51,13 +51,15 @@ The landing page is a tiny HTML stub: a "VoltEye Camera Cloud" heading, a line s
 
 So the goal is concrete: decrypt that ciphertext to get the admin token, then POST it to `/admin`. To decrypt it I need the private key of device `VE-92D0C45D`, and all I have is its public modulus `n` sitting in the `/fleet` list next to 29 others.
 
-That framing, plus the flavour text, is the whole hint. "Same assembly line, in the same hurry" and "family resemblance runs deeper than you'd think" is the classic tell for **shared-prime RSA keys**. When a batch of devices generates keys with too little entropy (a weak or predictable seed, a thin entropy pool right after boot, the same RNG state across an assembly line), two independently generated moduli can end up sharing one of their two primes by pure accident. This is a real bug that was surveyed at internet scale in 2012 by Heninger et al. ("Mining Your Ps and Qs")[^heninger] and independently by Lenstra et al. ("Ron was wrong, Whit is right"),[^lenstra] both of whom factored a chunk of the live TLS/SSH keyspace exactly this way.
+The flavour text pretty much tells you what's going on. "Same assembly line, in the same hurry" plus "family resemblance runs deeper than you'd think" made me think of **shared-prime RSA keys** straight away. When a batch of devices generates keys with too little randomness (a predictable seed, an empty entropy pool right after first boot, the same RNG state on every unit), two keys that should be unrelated can end up with one prime in common. This isn't just a CTF thing. In 2012 two separate teams scanned the internet's TLS and SSH keys and factored a big pile of them exactly this way: Heninger et al. ("Mining Your Ps and Qs")[^heninger] and Lenstra et al. ("Ron was wrong, Whit is right").[^lenstra]
 
 ## Background: why one shared prime breaks everything
 
-An RSA modulus is `n = p * q` with `p` and `q` secret primes. The security rests entirely on nobody being able to split `n` back into those two factors. The public exponent `e = 65537` and the modulus `n` are all anyone gets; the private exponent `d` is the inverse of `e` modulo `(p-1)(q-1)`, and you can only compute it if you know `p` and `q`.
+An RSA modulus is `n = p * q` with `p` and `q` secret primes. All the security comes from nobody being able to split `n` back into those two factors. Everyone gets the public exponent `e = 65537` and the modulus `n`. The private exponent `d` is the inverse of `e` modulo `(p-1)(q-1)`, and you can only work that out if you know `p` and `q`.
 
-Factoring a single well-generated 1024-bit modulus is infeasible. But shared primes sidestep factoring completely. Suppose two devices produced
+The way I think about it: `n` is like a paint colour made by mixing two secret base colours. Unmixing one colour on its own is hopeless. But if two cans were mixed using the same base, comparing them shows you that base, no unmixing needed.
+
+Factoring a single properly generated modulus of this size isn't practical. Shared primes skip factoring completely though. Suppose two devices produced
 
 ```text
 n_i = p * q_i
@@ -70,17 +72,17 @@ that happen to share the same `p`. Then `p` is a common divisor of both, and
 gcd(n_i, n_j) = p
 ```
 
-Euclid's algorithm computes that gcd in microseconds, no factoring involved. Once I have `p`, the rest falls out immediately: `q_i = n_i / p`, and I have the full factorisation of `n_i`. From there the private key is standard RSA:
+Euclid's algorithm finds that gcd basically instantly, even for numbers this big. Once I have `p`, dividing gives `q_i = n_i / p`, and that's the full factorisation of `n_i`. From there the private key is normal RSA:
 
 ```text
 d = e^(-1) mod (p-1)(q-1)
 ```
 
-The catch that makes it work here: the shared prime has to actually be shared. A modulus only leaks this way if some *other* modulus in the set was unlucky in the same spot. So the attack is inherently about the fleet, not the single target. I need to gcd the target against everyone else and hope one of them is its unlucky sibling.
+This only works if some *other* key in the set got unlucky with the same prime. One key on its own leaks nothing. So the attack is about the fleet, not the target: gcd the target against every other device and hope one of them is its sibling.
 
 ## The attack: pairwise gcd across the fleet
 
-The plan is one loop. Take the target modulus `n_t` for `VE-92D0C45D`, walk every other device in the fleet, and gcd the two. A result that isn't `1` (and isn't `n_t` itself) is a shared prime.
+It's one loop. Take the target modulus `n_t` for `VE-92D0C45D`, walk every other device in the fleet, and gcd the two. A result that isn't `1` (and isn't `n_t` itself) is a shared prime.
 
 ```python
 target = next(d for d in fleet if d["serial"] == captured["serial"])
@@ -102,11 +104,11 @@ p = 1135278566215727608805646067186134519446540270233949048033115288532219390438
 q = 7604696147938340484307989343843106838073627089367115610230838143941619797864388565188452345788647827253823004774277250889334536873961818402592084947046561
 ```
 
-A quick `assert p * q == n_t` confirms the split is real before spending any more effort on it.
+A quick `assert p * q == n_t` to make sure the split is real before going further.
 
 ## Recovering the key and decrypting the intercept
 
-With `p` and `q` in hand, building the private key and decrypting is textbook. The captured payload is RSA with PKCS#1 v1.5 padding, so I hand the reconstructed key to PyCryptodome's `PKCS1_v1_5` and let it strip the padding:
+With `p` and `q`, building the private key and decrypting is the easy part. The captured payload is RSA with PKCS#1 v1.5 padding, so I hand the reconstructed key to PyCryptodome's `PKCS1_v1_5` and let it strip the padding:
 
 ```python
 from Crypto.PublicKey import RSA
@@ -133,9 +135,9 @@ POST /admin {"token": "vlt_7575844924112f8654e055e4"}
 
 ## Cleaning it up
 
-The final `solve.py` is just those three pieces glued together: pull `/fleet` and `/captured`, run the pairwise-gcd search for the shared prime against the target modulus, reconstruct the private key, decrypt the PKCS#1 v1.5 ciphertext, and POST the recovered token to `/admin`. It also throws a couple of fallback token candidates at `/admin` (the raw decrypted bytes plus any token-looking substring pulled out with a regex) in case the payload had come wrapped in JSON or text, but the clean decrypt landed on the first try.
+The final `solve.py` is those pieces glued together: pull `/fleet` and `/captured`, gcd the target against the rest, rebuild the private key, decrypt, and POST the token to `/admin`. It also tries a couple of fallback tokens (the raw decrypted bytes, plus anything token-shaped pulled out with a regex) in case the payload came wrapped in JSON or text. Didn't need them, the clean decrypt worked first go.
 
-One thing worth noting for a bigger fleet: gcd-ing every pair is O(n²), which is nothing at 30 devices but does grow. The standard scale-up is Bernstein's **batch GCD**,[^batchgcd] which multiplies all the moduli into one big product and does a single product-tree pass to find every shared prime across thousands of keys in roughly O(n log² n). It's the same trick the 2012 papers used to sweep the whole internet. Here the naive double loop was already instant, so there was no reason to reach for it.
+If the fleet was thousands of devices instead of 30, checking every pair would get slow. The usual fix is Bernstein's **batch GCD**,[^batchgcd] which multiplies all the moduli together in a product tree and pulls out every shared prime in one pass. That's what the 2012 papers used on the whole internet. For 30 devices a plain loop was already instant.
 
 ## Flag
 
@@ -146,9 +148,9 @@ One thing worth noting for a bigger fleet: gcd-ing every pair is O(n²), which i
 
 ## Notes
 
-- Any time a challenge hands you a *fleet* of RSA public keys instead of a single one, try pairwise gcd across all of them before anything fancier (Wiener, Fermat, common-modulus, small-`e` tricks). Each gcd is essentially free, and shared primes are the single most common real-world RSA keygen bug.
-- The gcd only finds `p` if the target's unlucky sibling is also in the set you were given. That's why the challenge shipped 30 certs and pointed the intercept at one of them: the sibling is in the crowd on purpose.
-- Once a modulus is factored, everything encrypted to that device is trivially decryptable. There was no clever padding attack needed on the PKCS#1 v1.5 ciphertext, just a normal RSA decrypt with the recovered key.
+- If a challenge gives you a whole *set* of RSA public keys instead of one, gcd them against each other before trying anything fancier (Wiener, Fermat, common modulus, small `e`). It costs nothing and it's a real-world bug, not just a CTF trick.
+- The gcd only finds `p` if the target's sibling is in the set you were given. That's why the challenge handed over 30 certs: the sibling is in the crowd on purpose.
+- Once the modulus is factored, anything encrypted to that device is readable. No padding attack on the PKCS#1 v1.5 ciphertext needed, just a normal RSA decrypt.
 
 ## References
 
