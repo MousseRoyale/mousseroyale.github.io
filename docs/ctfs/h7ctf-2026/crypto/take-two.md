@@ -49,7 +49,7 @@ I got `lms.py` (the signer the server uses) and a live instance. The goal is to 
 }
 ```
 
-So `/sign` is a signing oracle that refuses the one message I actually want, `/deploy` boots anything that verifies against the root, and then there is `/rollback`. "Each leaf signs once" plus an endpoint that reverts the signing counter plus a challenge called Take Two. That is basically the whole solve laid out in three lines.
+So `/sign` will sign anything except the one build I actually want, `/deploy` boots anything that verifies against the root, and then there's `/rollback`. "Each leaf signs once", an endpoint that reverts the signing counter, and a challenge called Take Two. Pretty obvious where this is going.
 
 The comment at the top of `lms.py` says it out loud too:
 
@@ -60,7 +60,7 @@ The comment at the top of `lms.py` says it out loud too:
 # is operational (a leaf reused via a counter reset), not in this code.
 ```
 
-The scheme is modelled on LMS, the Leighton-Micali hash-based signature system from RFC 8554[^rfc8554], the kind of thing NIST approved for firmware signing in SP 800-208[^sp800208]. Both documents stress the same thing: these schemes are stateful, and if a one-time key ever signs two different messages the security falls apart. That failure has been studied directly (how much security a WOTS key actually loses after a second signature[^oops], and how state management goes wrong in real deployments with backups and VM clones and restarted processes[^statemgmt]). Here the server hands me the reset button directly, so I do not need anything clever out of those papers. I just need to understand how the chains work well enough to forge.
+The scheme is modelled on LMS, the Leighton-Micali hash-based signatures from RFC 8554,[^rfc8554] which NIST approved for things like firmware signing in SP 800-208.[^sp800208] Both documents hammer the same point. These schemes are stateful, and if a one-time key ever signs two different messages the security falls apart. People have studied exactly how much a WOTS key loses after a second signature,[^oops] and how state management goes wrong in real deployments with backups, VM clones and restarted processes.[^statemgmt] Here the server just gives me the reset button, so I didn't need anything clever from those papers. I just needed to understand the chains well enough to forge.
 
 ## Background: how this signature works
 
@@ -75,7 +75,9 @@ def chain(x, steps):
     return x
 ```
 
-Hash `x` with SHA-256, `steps` times. Walking a chain forward is free for anybody. Walking it backward means inverting SHA-256, which nobody can do. Hold that asymmetry, it is the entire attack.
+Hash `x` with SHA-256, `steps` times. Anyone can walk a chain forward. Walking it backward means inverting SHA-256, which nobody can do. That one-way-ness is what the whole attack plays with.
+
+The way I picture it: each chain is a staircase you can only climb up. Signing tells everyone which step you're standing on for each digit. Anyone can climb higher from there, but nobody can go back down.
 
 ### Winternitz one-time signatures (WOTS)
 
@@ -107,7 +109,7 @@ def wots_pk_from_sig(msg, sig):
 
 ### Why the checksum exists
 
-If it were just the 64 message digits, forgery would be trivial: every digit revealed is `chain(sk_i, d_i)`, and since anyone can hash forward, I could bump any digit *up* to a larger value for free. The checksum `c = sum(15 - d_i)` is designed to stop exactly that. Raise any message digit and the checksum drops, which forces at least one checksum digit *down*, and lowering a chain value means inverting the hash. So for a single signature you cannot forge a different message. That is the "one-time" guarantee.
+If it were just the 64 message digits, forging would be easy. Every revealed value is `chain(sk_i, d_i)`, and since anyone can hash forward, I could bump any digit *up* for free. The checksum `c = sum(15 - d_i)` is there to stop that. Raise any message digit and the checksum drops, which pushes at least one checksum digit *down*, and going down a chain means inverting the hash. In staircase terms, the checksum stairs run the opposite way, so climbing up on the message side forces you down somewhere else. With one signature you can't forge a different message. That's the "one-time" guarantee.
 
 ### The Merkle tree on top
 
@@ -133,13 +135,13 @@ The cryptography here is fine. The bug is that `/rollback` sets `self.ctr` back 
 
 ## The vulnerability: one key, many signatures
 
-The "one-time" safety rests on a leaf signing exactly one message. Sign a second message under the same leaf and the checksum no longer saves you, because now I can *choose* which of two revealed chain values to extend at each position.
+The "one-time" safety depends on a leaf signing exactly one message. Sign a second message with the same leaf and the checksum stops helping, because now I can *choose* which of two revealed values to extend at each position. I've seen you standing on two different steps of every staircase, so I just start from whichever is lower.
 
-Concretely: at position `i`, if I have a signature for a message whose digit there is `s`, I hold `chain(sk_i, s)`. For any target digit `t >= s`, I can compute `chain(sk_i, t)` myself by hashing `(t - s)` more times. No secret needed, it is just more `chain()` on a value I already have. The only positions I cannot reach are the ones where the target digit is *below* every digit I have seen, since that would need walking a chain backward.
+At position `i`, if I have a signature for a message whose digit there is `s`, I hold `chain(sk_i, s)`. For any target digit `t >= s`, I can compute `chain(sk_i, t)` myself by hashing `(t - s)` more times. No secret needed, it's just more `chain()` on a value I already have. The only positions I can't reach are the ones where the target digit is *below* every digit I've seen, since that would mean walking a chain backward.
 
-So the plan writes itself. Collect many signatures under one leaf, for messages I pick, and at every one of the 67 positions I get a growing pile of `(digit, chain value)` samples. For the real target, at each position I pick whichever sample has a digit at or below the target digit and extend it forward. As long as *some* sample sits low enough at every position, the whole forged signature assembles, checksum digits included, and it verifies against the untouched root.
+So the plan is to collect many signatures under one leaf, for messages I pick, and at every one of the 67 positions I get a growing pile of `(digit, chain value)` samples. For the real target, at each position I pick whichever sample has a digit at or below the target digit and extend it forward. As long as *some* sample sits low enough at every position, the whole forged signature assembles, checksum digits included, and it verifies against the untouched root.
 
-`/rollback` is what makes "many signatures under one leaf" possible. Every time I call it the counter goes back to 0, so the next `/sign` signs under leaf 0 again. Repeat and I get arbitrarily many leaf-0 signatures for whatever benign filler messages I want.
+`/rollback` is what makes "many signatures under one leaf" possible. Every call puts the counter back to 0, so the next `/sign` signs under leaf 0 again. Repeat and I get arbitrarily many leaf-0 signatures for whatever benign filler messages I want.
 
 ```mermaid
 flowchart LR
@@ -153,7 +155,7 @@ flowchart LR
 
 ## Collecting samples
 
-The loop is just rollback, sign, record, repeat. Every response comes back with `sig.leaf == 0`, which confirms the reset is doing what I think:
+The loop is rollback, sign, record, repeat. Every response came back with `sig.leaf == 0`, so the reset was doing what I thought:
 
 ```python
 def gather(n):
@@ -223,13 +225,13 @@ The honest `/sign` was never asked to sign the target build. I rebuilt its signa
 
 ## Cleaning it up
 
-The final `solve.py` is just those three pieces stitched together: `gather(300)` hammering rollback-then-sign, `forge()` doing the per-position extension, and a `deploy()` call at the end. It imports `chain`, `msg_digits`, and `LEN` straight from the challenge's own `lms.py`, so there is no reimplementation of the scheme to get subtly wrong, the forge uses the exact same primitives the verifier does.
+The final `solve.py` is those three pieces stitched together. `gather(300)` does rollback-then-sign, `forge()` does the per-position extension, and `deploy()` sends it. It imports `chain`, `msg_digits` and `LEN` straight from the challenge's `lms.py`, so I never reimplemented the scheme and couldn't get it subtly wrong. The forge uses the same functions the verifier does.
 
 ## Notes
 
-- Hash-based one-time signatures (WOTS, LMS, XMSS, SPHINCS+) are only as safe as their state management. The code can be textbook-correct, as the challenge's own comment brags, and still be fully broken by anything that lets one leaf sign twice: a counter reset, a restored VM snapshot, a restarted process that forgot its state, a rolled-back clock. RFC 8554 and NIST SP 800-208 both call this out, and SP 800-208 even requires the private state to live in hardware that will not export it, precisely so a "maintenance rollback" like this one cannot happen.
-- You do not need exactly two signatures. Any number of signatures under one key, for messages you control, gives you that many independent samples at every chain position, and you get to keep whichever is most convenient per position. More samples just widens the coverage.
-- No cryptanalysis of SHA-256 was involved. The whole attack is collect-then-extend: gather data, then do constant-time forward hashing. Cheap and fully deterministic once enough samples are in.
+- Stateful hash-based signatures (WOTS, LMS, XMSS) are only as safe as their state management. The code can be completely correct, like the challenge comment says, and still be broken by anything that lets one leaf sign twice. A counter reset, a restored VM snapshot, a process that restarts and forgets its state. RFC 8554 and NIST SP 800-208 both warn about this, and SP 800-208 wants the keys and state kept in hardware that won't export them, so a "maintenance rollback" like this can't happen.
+- You don't need exactly two signatures. Every extra signature under the same key is another sample at every position, and you keep whichever one is most useful per position. More samples, more coverage.
+- No attack on SHA-256 itself was involved. It's just collect, then hash forward. Cheap, and fully deterministic once there are enough samples.
 
 ## References
 
