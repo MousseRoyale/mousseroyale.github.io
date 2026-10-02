@@ -141,15 +141,6 @@ So the plan is to collect many signatures under one leaf, for messages I pick, a
 
 `/rollback` is what makes "many signatures under one leaf" possible. Every call puts the counter back to 0, so the next `/sign` signs under leaf 0 again. Repeat and I get arbitrarily many leaf-0 signatures for whatever benign filler messages I want.
 
-```mermaid
-flowchart LR
-    A["POST /rollback<br/>ctr to 0"] --> B["POST /sign<br/>random filler fw"]
-    B --> C["signature, always leaf 0"]
-    C --> D{"collected<br/>enough?"}
-    D -->|no| A
-    D -->|yes| E["forge target sig<br/>per position"]
-    E --> F["POST /deploy<br/>target build"]
-```
 
 ## Collecting samples
 
