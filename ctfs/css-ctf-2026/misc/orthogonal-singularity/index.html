@@ -1,0 +1,2977 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Three stages in three different fields (proof of work, a noisy chirp, then knot theory). Got through the first two, the third beat everyone">
+      
+      
+        <meta name="author" content="MousseRoyale">
+      
+      
+        <link rel="canonical" href="https://mousseroyale.github.io/ctfs/css-ctf-2026/misc/orthogonal-singularity/">
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+        <link rel="next" href="../../../defcamp-2026/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Orthogonal Singularity - MousseRoyale</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,300i,400,400i,700,700i%7CIBM+Plex+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"IBM Plex Sans";--md-code-font:"IBM Plex Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#orthogonal-singularity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="MousseRoyale" class="md-header__button md-logo" aria-label="MousseRoyale" data-md-component="logo">
+      
+  <img src="../../../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MousseRoyale
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Orthogonal Singularity
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CTFs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../tags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="MousseRoyale" class="md-nav__button md-logo" aria-label="MousseRoyale" data-md-component="logo">
+      
+  <img src="../../../../assets/logo.svg" alt="logo">
+
+    </a>
+    MousseRoyale
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CTFs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CTFs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../boroCTF-2026/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    boroCTF 2026
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    boroCTF 2026
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crypto
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Crypto
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../boroCTF-2026/crypto/player-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Player 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_3" id="__nav_2_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geoint
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Geoint
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../boroCTF-2026/geoint/lake-of-doom-and-despair/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lake of Doom
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CSS CTF 2026
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CSS CTF 2026
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Miscellaneous
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orthogonal Singularity
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orthogonal Singularity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1-the-handshake-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: the handshake gate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-2-locking-the-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: locking the frequency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2: locking the frequency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-data-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the data is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fitting-the-chirp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fitting the chirp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#turning-two-frequencies-into-hex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turning two frequencies into hex
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-actually-went" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it actually went
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3-the-braid-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: the braid (in progress)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 3: the braid (in progress)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-wording" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the wording
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-i-tried" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What I tried
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#things-i-learned-along-the-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Things I learned along the way
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nothing-left" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nothing left
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-its-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where it's at
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flag
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../defcamp-2026/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DefCamp 2026
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DefCamp 2026
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Miscellaneous
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../defcamp-2026/misc/legacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    legacy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../gpn-ctf-2026/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPN CTF 2026
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    GPN CTF 2026
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_2" id="__nav_2_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cryptography
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cryptography
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/crypto/competition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    COMpetition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/crypto/easy-dsa/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Easy DSA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/crypto/fortune/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fortune
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miscellaneous
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Miscellaneous
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/misc/culinary-circles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Culinary Circles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/misc/customer-service/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customer Service
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/misc/double-fried/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Double Fried
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/misc/knitted-flag/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Knitted Flag
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/misc/sanity-check/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sanity Check
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_4" id="__nav_2_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reversing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reversing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/rev/autocooker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autocooker
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5_5" id="__nav_2_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gpn-ctf-2026/web/restaurant-builder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Restaurant Builder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../h7ctf-2026/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    H7CTF 2026 Quals
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    H7CTF 2026 Quals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_2" id="__nav_2_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cryptography
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cryptography
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../h7ctf-2026/crypto/loose-lips/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Loose Lips
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../h7ctf-2026/crypto/owners-draw/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Owner's Draw
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../h7ctf-2026/crypto/polynonce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Polynonce
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../h7ctf-2026/crypto/shared-blood/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Shared Blood
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../h7ctf-2026/crypto/take-two/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Take Two
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../tags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-1-the-handshake-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: the handshake gate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-2-locking-the-frequency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: locking the frequency
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2: locking the frequency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-data-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the data is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fitting-the-chirp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fitting the chirp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#turning-two-frequencies-into-hex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Turning two frequencies into hex
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-it-actually-went" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it actually went
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stage-3-the-braid-in-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: the braid (in progress)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 3: the braid (in progress)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reading-the-wording" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reading the wording
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-i-tried" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What I tried
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#things-i-learned-along-the-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Things I learned along the way
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nothing-left" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nothing left
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#where-its-at" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where it's at
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flag
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:braid-groups" class="md-tag">braid-groups</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:chirp" class="md-tag">chirp</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:css-ctf-2026" class="md-tag">css-ctf-2026</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:dsp" class="md-tag">dsp</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:knot-invariants" class="md-tag">knot-invariants</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:misc" class="md-tag">misc</a>
+      
+    
+      
+      
+      
+      
+        <a href="../../../../tags/#tag:proof-of-work" class="md-tag">proof-of-work</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="orthogonal-singularity">Orthogonal Singularity<a class="headerlink" href="#orthogonal-singularity" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Event</strong></td>
+<td>CSS CTF 2026: Return of Nexus</td>
+</tr>
+<tr>
+<td><strong>Category</strong></td>
+<td>Misc</td>
+</tr>
+<tr>
+<td><strong>Difficulty</strong></td>
+<td>Expert</td>
+</tr>
+<tr>
+<td><strong>Result</strong></td>
+<td>Stages 1 and 2 solved, stage 3 still in progress (0 solves during the event)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Challenge Description</p>
+<p>Somewhere listening posts along the galactic rim have intercepted a telemetry beacon broadcasting near the event horizon. To stabilize the link and extract the core telemetry, you must:</p>
+<ol>
+<li>Pass the handshake gate before the uplink decays.</li>
+<li>Track the carrier's trajectory through the noise and lock the frequency.</li>
+<li>Trace the topology of the underlying topological braid to collapse the singularity.</li>
+</ol>
+<p><code>nc $HOST 7878</code></p>
+</div>
+<p>No files, just a port. Three stages, and every one of them is a different field: a proof of work, a signal processing problem, then braid and knot theory. Nobody solved it during the event. I got through stages 1 and 2 and automated them, then spent the rest of the CTF throwing invariants at stage 3. I did use AI to help me out on this one, quite heavily in the later stages.</p>
+<p>This writeup goes through the working solutions for stages 1 and 2, with the detours mentioned briefly where they're relevant, then a summary of everything I tried on the unsolved final stage. If the challenge authors share their writeup later, I might update this with the actual solution.</p>
+<h2 id="stage-1-the-handshake-gate">Stage 1: the handshake gate<a class="headerlink" href="#stage-1-the-handshake-gate" title="Permanent link">&para;</a></h2>
+<p>Connecting gets you nothing. No banner, no prompt, and sending <code>\n</code>, <code>HELLO</code> or a TLS ClientHello gets nothing back either. That had me thinking it was a custom binary protocol or rate limiting. It wasn't. The server just sits silent for about 25 to 30 seconds before it says anything, and my read timeouts were shorter than that. Then:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>POW: SHA256(b742b7ec8188b48ca5e2c3a7 + nonce) leading_zero_bits &gt;= 24
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>nonce&gt;
+</span></code></pre></div>
+<p><code>POW</code> is proof of work (the same idea as Hashcash,<sup id="fnref:hashcash"><a class="footnote-ref" href="#fn:hashcash">4</a></sup> and Bitcoin mining), and that's the "handshake gate" from the description. Before the server spends anything on you, you burn some CPU to prove you're serious: find a nonce that makes the hash start with 24 zero bits. "Before the uplink decays" is the clock on it.</p>
+<p>The catch is the <code>+</code>. It reads like you should hex-decode the prefix and append the nonce bytes. It's actually plain string concatenation of the prefix text and the nonce as a decimal string. I tried the hex-decode version first.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">digest</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">((</span><span class="n">prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">nonce</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"ascii"</span><span class="p">))</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">if</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">digest</span><span class="p">,</span> <span class="s2">"big"</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">24</span><span class="p">)):</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="o">...</span>  <span class="c1"># found it</span>
+</span></code></pre></div>
+<p>24 leading zero bits is about 16.7M hashes on average. Single-threaded Python usually got there in under 10 seconds, but one unlucky run took 45 s (35M attempts) and the server dropped the connection before I even got to stage 2. That's the uplink decaying. So the solver got split across CPU cores. On Windows that came with a funny trap: checking the shared <code>multiprocessing.Event</code> on every loop iteration made 15 workers <em>slower</em> than 1 (6.2 s vs 2.07 s), because that check is an OS-level sync call that costs way more than one SHA-256. Checking it every 20,000 iterations fixed it, and a 24-bit solve dropped to 0.4 to 5 seconds.</p>
+<p>The right nonce gets <code>[+] ACCESS PIPELINE OPEN</code>.</p>
+<h2 id="stage-2-locking-the-frequency">Stage 2: locking the frequency<a class="headerlink" href="#stage-2-locking-the-frequency" title="Permanent link">&para;</a></h2>
+<p>Straight after the PoW the server dumps a burst and waits:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>--- EMISSION BURST ---
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>b24aef2bc31ab0e229d805d0d2312f371429eb1dfcaf90d8...   (64,000 hex chars)
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>--- END BURST ---
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>f_bounds [hex]&gt;
+</span></code></pre></div>
+<p>Sit at that prompt for about 25 seconds and the connection closes. So whatever the answer is, it has to be computed and sent by a script, not worked out by hand.</p>
+<h3 id="what-the-data-is">What the data is<a class="headerlink" href="#what-the-data-is" title="Permanent link">&para;</a></h3>
+<p>64,000 hex chars is 32,000 bytes, but bytes of what? "Carrier" and "frequency" in the description say it's a signal, so the question is which sample format makes it look like one. Floats were out straight away (decoding as float32 or float64 gives inf and NaN garbage), which left the integer formats.</p>
+<p>The quick test: chop the samples into 8 equal chunks, run an FFT on each, and note which frequency is loudest in each chunk. If the format is wrong you're looking at shuffled bytes, so the loudest frequency jumps around at random. If it's right and there's a real signal in there, the loudest frequency should move <em>smoothly</em> from chunk to chunk. That's all "a smooth ridge" means: on a spectrogram (frequency against time, brightness is loudness) it shows up as one bright line you could trace with a pen.</p>
+<p><img alt="int16 LE shows a clean rising ridge, int16 BE is noise" class="cc-img" src="spectrogram.png" /></p>
+<p>Only int16 little-endian does it. For the first burst I captured, the per-chunk peak bins were:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>peak bin:   284  293  309  341  377  420  475  547
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>gap:           9   16   32   36   43   55   72
+</span></code></pre></div>
+<p>The frequency is climbing, and the gaps keep getting bigger, so it's climbing faster and faster. Gaps that grow steadily (noisily here, but steadily) are what constant acceleration looks like, and constant acceleration traces a parabola. So the frequency follows</p>
+<div class="arithmatex">\[
+f(u) = f_0 + d\,u^2, \qquad u = \frac{n}{N} \in [0, 1]
+\]</div>
+<p>with the flat bit (the vertex) right at the start. That's a quadratic chirp,<sup id="fnref:chirp"><a class="footnote-ref" href="#fn:chirp">5</a></sup> the same shape <code>scipy.signal.chirp(method='quadratic', vertex_zero=True)</code> makes.<sup id="fnref:scipy"><a class="footnote-ref" href="#fn:scipy">1</a></sup> 16,000 real samples, one chirp, buried in noise.</p>
+<p>Now the wording lines up. The "carrier's trajectory" is that ridge, the path the frequency takes over time. "Through the noise" is the noise it's buried in. And <code>f_bounds</code> is the bounds of the trajectory: the frequency it starts at (<code>f0</code>, the initial state) and the one it ends at (<code>f1 = f0 + d</code>, the terminal state). "Lock the frequency" means pin those two down, and the server even says <code>PHASE LOCK CONFIRMED</code> when you do.</p>
+<h3 id="fitting-the-chirp">Fitting the chirp<a class="headerlink" href="#fitting-the-chirp" title="Permanent link">&para;</a></h3>
+<p>The noise is the annoying part. SNR across the bursts ranged from about -1 dB to +10 dB, and at the low end the usual trick (Hilbert transform, unwrap the phase, fit a curve) falls apart. What works is a coherent matched filter<sup id="fnref:matched"><a class="footnote-ref" href="#fn:matched">6</a></sup> (the same idea radar uses for pulse compression): guess the chirp parameters, "de-chirp" the whole signal with them, and see how much energy lines up. The right parameters make all 16,000 samples add up in phase, so even a signal below the noise floor stands out.</p>
+<p>The model is <code>f(u) = f0 + d·u²</code> with <code>u = n/N</code>, so the phase is <code>2π(f0·n + d·n³/(3N²))</code>. For each curvature <code>d</code> on a fine grid, de-chirp and take the FFT peak (that gives the best <code>f0</code> for that <code>d</code>), keep the best pair, then polish with Nelder-Mead:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">d_seed</span> <span class="o">-</span> <span class="mf">0.03</span><span class="p">),</span> <span class="n">d_seed</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span> <span class="mf">6e-5</span><span class="p">):</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">spec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">d</span> <span class="o">*</span> <span class="n">cub</span><span class="p">),</span> <span class="n">nfft</span><span class="p">)[:</span> <span class="n">nfft</span> <span class="o">//</span> <span class="mi">2</span><span class="p">])</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">best</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">best</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="n">k</span> <span class="o">/</span> <span class="n">nfft</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+</span></code></pre></div>
+<p>About 2 seconds per burst, well inside the window. That gives <code>f0</code> and <code>f1 = f0 + d</code> in cycles per sample.</p>
+<h3 id="turning-two-frequencies-into-hex">Turning two frequencies into hex<a class="headerlink" href="#turning-two-frequencies-into-hex" title="Permanent link">&para;</a></h3>
+<p>This is the actual puzzle, and nothing in the protocol tells you how to do it. There's no sample rate anywhere, so "convert to Hz and pack it" is a guess with a free parameter in it.</p>
+<p>The way in is to stop looking at one burst. The frequencies are random per connection, so collect a pile of bursts, fit each one precisely, and look at the numbers together. Multiply each by 2000 and something jumps out:</p>
+<table>
+<thead>
+<tr>
+<th>Burst</th>
+<th>f0 × 2000</th>
+<th>f1 × 2000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>223100</td>
+<td>200.004</td>
+<td>584.509</td>
+</tr>
+<tr>
+<td>223149</td>
+<td>267.003</td>
+<td>500.504</td>
+</tr>
+<tr>
+<td>223345</td>
+<td>164.003</td>
+<td>466.504</td>
+</tr>
+<tr>
+<td>223417</td>
+<td>123.006</td>
+<td>672.510</td>
+</tr>
+<tr>
+<td>223524</td>
+<td>301.003</td>
+<td>617.505</td>
+</tr>
+</tbody>
+</table>
+<p><code>f0</code> always lands on a whole number and <code>f1</code> always lands on a half. (Raw <code>f1</code> comes out about 0.02 higher. That's because the server builds the phase with a cumulative sum, which nudges the end frequency by <code>d/N</code>, so I subtract that first.) Here's where all 13 bursts land:</p>
+<p><img alt="f0 lands on whole numbers and f1 on halves, across all 13 bursts" class="cc-img" src="lattice.png" /></p>
+<p>Thirteen dots stacked on two exact spots isn't a coincidence, the chance is around 1e-22.</p>
+<p>So the frequencies are on a lattice. The next question is how big a step is. Across the bursts, <code>f0</code> covers 234 steps and <code>f1</code> 220 steps. For random bytes you'd expect a spread of about 236 out of 255. If a step were smaller than one byte value, the spread would blow past 255. So <strong>one lattice step is one byte value</strong>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>f0 = (base0 + B0) / 2000
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>f1 = (base1 + B1) / 2000
+</span></code></pre></div>
+<p>That's the key realisation: the author didn't measure a frequency and encode it, they picked the two answer bytes and <em>generated</em> the chirp from them. The bytes leak straight into the signal.</p>
+<p>The data only pins the bases down to a range (<code>base0</code> roughly 90 to 111, <code>base1</code> roughly 432.5 to 439.5), so I went with the roundest values in range: <strong>100</strong> and <strong>437.5</strong>. (At a 16 kHz sample rate those are 800 Hz and 3500 Hz, which is probably what the author had in mind.) Then it's two subtractions, one byte each, and "<code>f_bounds</code>" with an answer that has to be hex means 4 hex chars. With nothing saying which byte comes first there are only two orders to try, and terminal first is the one that works:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">b0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">f0_k</span> <span class="o">-</span> <span class="mi">100</span><span class="p">))</span>     <span class="c1"># initial</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">b1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">f1_k</span> <span class="o">-</span> <span class="mf">437.5</span><span class="p">))</span>   <span class="c1"># terminal</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">answer</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">b1</span><span class="si">:</span><span class="s2">02x</span><span class="si">}{</span><span class="n">b0</span><span class="si">:</span><span class="s2">02x</span><span class="si">}</span><span class="s2">"</span>
+</span></code></pre></div>
+<p>First live try with this: <code>3c04</code>, and</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[+] PHASE LOCK CONFIRMED
+</span></code></pre></div>
+<p>It passed on every connection after that.</p>
+<h3 id="how-it-actually-went">How it actually went<a class="headerlink" href="#how-it-actually-went" title="Permanent link">&para;</a></h3>
+<p>Not that cleanly. Before the lattice turned up I burned well over a dozen live attempts on "round the frequency to Hz at some sample rate, mod 256" across every sensible sample rate (4 to 48 kHz) and both byte orders, plus a few other packing schemes. All wrong, and a wrong answer just closes the socket about 0.055 s later with no message, so there's no telling <em>how</em> wrong.</p>
+<p>A couple of my own mistakes made it worse. <code>Fraction(x).limit_denominator(2000)</code> will find a "clean" fraction for almost any real number at that precision, which briefly had me convinced the sample rate was 10 kHz. And an off-by-one when reading candidate numbers out of a printout meant six of seven tests in one sweep sent the opposite byte order to what I thought. Archiving every connection with its own ID and a JSON sidecar (burst, candidates, what got sent, what came back) is what caught that, and it was worth it for stage 3 too.</p>
+<h2 id="stage-3-the-braid-in-progress">Stage 3: the braid (in progress)<a class="headerlink" href="#stage-3-the-braid-in-progress" title="Permanent link">&para;</a></h2>
+<p>A correct <code>f_bounds</code> gets you this:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[+] PHASE LOCK CONFIRMED
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>--- TOPOLOGY REGISTER ---
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>B4_GEN: [2, 3, 2, -2, -2, 2, -2, -3, -3, -2, 1, 2, -2, 2, 1, -3]
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>--- END REGISTER ---
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>homology_invariant&gt;
+</span></code></pre></div>
+<p>A braid word on 4 strands.<sup id="fnref:braid"><a class="footnote-ref" href="#fn:braid">7</a></sup> ("Word" is the group theory term for a sequence of generators.) Each number is a generator: <code>±1</code> crosses strands 1 and 2, <code>±2</code> strands 2 and 3, <code>±3</code> strands 3 and 4, and the sign says which strand goes over. Nothing actually says it's the braid group B4, but the name <code>B4_GEN</code> and the values being exactly ±1, ±2, ±3 make it hard to read any other way. The word is random per connection, always 16 letters. The prompt wants a "homology invariant", with no hint at the format. Join the ends of the braid up (its closure) and you get a link, so the job is presumably to compute some invariant of that link and send it.</p>
+<p>Same rules as stage 2: any wrong answer and the socket closes about 0.055 s later, silently. That held for every input I ever sent, garbage and a 4000 character string included, so a wrong value and a wrong format look identical. The prompt waits 27 to 32 seconds before giving up on you, so none of my answers were timing out. The admins confirmed the stage works, so a right answer exists.</p>
+<h3 id="reading-the-wording">Reading the wording<a class="headerlink" href="#reading-the-wording" title="Permanent link">&para;</a></h3>
+<p>Stages 1 and 2 both mapped cleanly onto their lines in the description, so I worked through stage 3 the same way, one phrase at a time:</p>
+<table>
+<thead>
+<tr>
+<th>Wording</th>
+<th>Reading</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>homology_invariant</code></td>
+<td>a classical invariant: determinant, signature, Alexander/Conway, H₁ of something</td>
+<td>wrong in every format I tried</td>
+</tr>
+<tr>
+<td>"Trace the topology"</td>
+<td>a trace: the Burau or LKB matrix, or Sage's <code>markov_trace()</code>, which has "trace" and "braid" in one name</td>
+<td>all wrong</td>
+</tr>
+<tr>
+<td>"Orthogonal"</td>
+<td>the signature, computed by orthogonally diagonalising <code>V + Vᵀ</code> from the Seifert matrix<sup id="fnref:signature"><a class="footnote-ref" href="#fn:signature">8</a></sup></td>
+<td>wrong, both sign conventions</td>
+</tr>
+<tr>
+<td>"Singularity"</td>
+<td>links of plane curve singularities: the Milnor number, or a label like <code>D13</code></td>
+<td>wrong</td>
+</tr>
+<tr>
+<td>"collapse the singularity"</td>
+<td>squash the word to a normal form (Garside, or the dual BKL version)</td>
+<td>lengths and normal form words all wrong</td>
+</tr>
+<tr>
+<td>"the underlying ... braid"</td>
+<td>the positive braid you get by dropping every sign (singularity links are closures of positive braids)</td>
+<td>everything above again on it, wrong</td>
+</tr>
+<tr>
+<td>"topology of the ... braid"</td>
+<td>the braid itself as a mapping class, not its closure: its Nielsen-Thurston type and stretch factor<sup id="fnref:nt"><a class="footnote-ref" href="#fn:nt">11</a></sup></td>
+<td>wrong</td>
+</tr>
+<tr>
+<td>"stabilize the link" (opening line)</td>
+<td>Markov stabilization, which ties to the braid index</td>
+<td>wrong</td>
+</tr>
+</tbody>
+</table>
+<p>The rest of the opening line ("listening posts", "galactic rim", "event horizon", "extract the core telemetry") reads as scene-setting, and none of my readings of it went anywhere. In stage 2 the wording turned out accurate but silent on the hard part, so stage 3 might be the same, with the missing piece being a convention rather than a word. I still think the answer uses some part of the wording I haven't read right yet.</p>
+<h3 id="what-i-tried">What I tried<a class="headerlink" href="#what-i-tried" title="Permanent link">&para;</a></h3>
+<p>The closest precedent I found was "Unlimited Braid Works" from zer0pts CTF 2023, which looked like hard braid group crypto but was actually solved through an off-by-one in how the challenge generated its braids.<sup id="fnref:ubw"><a class="footnote-ref" href="#fn:ubw">12</a></sup> So before going deep on theory I checked whether these words had any shortcut like that (they don't, more on that below).</p>
+<p>I checked every invariant against SageMath<sup id="fnref:sage"><a class="footnote-ref" href="#fn:sage">2</a></sup> and SnapPy<sup id="fnref:snappy"><a class="footnote-ref" href="#fn:snappy">3</a></sup> first, so "wrong" meant wrong idea and not buggy maths. Each guess cost a full live connection, so guesses had to be picked rather than sprayed. Grouped by the thinking behind them, here's what went in.</p>
+<p>The obvious move: the standard invariants a "homology invariant" prompt could mean, in whatever formats seemed sensible.</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>What got sent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Determinant</td>
+<td><code>\|Δ(-1)\|</code>, hex, signed</td>
+</tr>
+<tr>
+<td>Signature</td>
+<td>both sign conventions</td>
+</tr>
+<tr>
+<td>Alexander / Conway</td>
+<td>coefficients in about 8 different formats</td>
+</tr>
+<tr>
+<td>Linking numbers</td>
+<td>int, negated, doubled, absolute, float, hex, summed</td>
+</tr>
+<tr>
+<td>Writhe / components</td>
+<td>exponent sum, component count, per-generator sums</td>
+</tr>
+<tr>
+<td>H₁</td>
+<td>of the double branched cover (<code>Z/det</code> and the full Smith normal form, e.g. <code>Z/2 + Z/2 + Z/12</code>), of the link complement (<code>Z + Z</code>)</td>
+</tr>
+<tr>
+<td>Polynomials</td>
+<td>Jones, HOMFLY-PT and Sage's <code>markov_trace()</code>, all as Sage prints them<sup id="fnref:sagelink"><a class="footnote-ref" href="#fn:sagelink">10</a></sup></td>
+</tr>
+<tr>
+<td>Khovanov</td>
+<td>total rank (the thin shortcut, then the true rank via khoca), and Sage's printout raw and tidied</td>
+</tr>
+</tbody>
+</table>
+<p>The readings from the wording table above, each tried properly:</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>What got sent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Traces</td>
+<td>Burau and LKB traces, the Burau matrix itself (4 layouts), fixed strands</td>
+</tr>
+<tr>
+<td>Normal forms ("collapse")</td>
+<td>Garside infimum, canonical length and supremum; BKL normal form word and length; the reduced word</td>
+</tr>
+<tr>
+<td>Singularity readings</td>
+<td>Milnor number, δ-invariant, 2 × genus, <code>D13</code>, braid index</td>
+</tr>
+<tr>
+<td>The braid as a mapping class</td>
+<td>Nielsen-Thurston type, stretch factor in 4 spellings and its minimal polynomial (computed with <code>flipper</code>)</td>
+</tr>
+<tr>
+<td>"Positive braid" reading</td>
+<td>most of the above again on the word with every sign dropped</td>
+</tr>
+<tr>
+<td>Named links</td>
+<td><code>Hopf link</code> on a word that closes to the Hopf link</td>
+</tr>
+</tbody>
+</table>
+<p>Going after the format instead, plus some long shots to make sure I wasn't overthinking it:</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>What got sent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A stage 2 style register</td>
+<td>two-byte hex spellings like <code>f"{a:02x}{b:02x}"</code> of pairs of invariants, and the strand permutation in 6 register spellings, since stage 2's answer was a two-byte register</td>
+</tr>
+<tr>
+<td>Other conventions</td>
+<td>the word reversed, mirrored, index-flipped and plat-closed</td>
+</tr>
+<tr>
+<td>Dynnikov coordinates</td>
+<td>3 spellings</td>
+</tr>
+<tr>
+<td>Things that shouldn't work</td>
+<td>the word echoed back, sign products and sums, <code>hi</code>, <code>H</code>, <code>H1</code>, <code>homology_invariant</code>, 4000 × <code>A</code>, hashes of the word, every integer from -12 to 40, the stage 2 answer and PoW nonce</td>
+</tr>
+</tbody>
+</table>
+<p>That's 233 answers the server actually evaluated, and none were right. A few protocol probes too: leaving off the trailing newline keeps the socket open (the server reads a whole line), while an empty line, two lines at once, CRLF and a NUL byte all get the same silent close.</p>
+<h3 id="things-i-learned-along-the-way">Things I learned along the way<a class="headerlink" href="#things-i-learned-along-the-way" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Every word closes to a 2-component link (or 4 components when the strands all return home, about 1 in 12). That isn't a clue, it's forced: 16 crossings is 16 swaps, an even permutation of 4 strands, and those only come in a couple of shapes. It also rules out knot-only invariants (knot Floer homology and friends), since an author testing random words would crash every time.</li>
+<li>Every closure I checked is Khovanov-thin,<sup id="fnref:khovanov"><a class="footnote-ref" href="#fn:khovanov">9</a></sup> which means its Khovanov rank is just <code>det + 2</code> and the Rasmussen invariant is minus the signature. That collapsed a whole family of fancy homology ideas back into the determinant and signature I'd already sent. Sage's Khovanov hangs on a raw 16-crossing word, but after simplifying the diagram in SnapPy (16 crossings down to 0 to 14) most words finish in well under a second, and khoca does the positive braid in about a second too.</li>
+<li>The words really are uniformly random. Nothing in the letter stats or seeds held up once I corrected for how many things I'd tested.</li>
+<li>I also looked for any link between stage 3 and the earlier stages (the PoW, the stage 2 burst and its answer), in case the word was built from them. Found nothing.</li>
+<li>The stage 2 trick can't work here. In stage 2 the server built the data <em>from</em> the secret, so the secret left a footprint. In stage 3 the server takes a random word and computes the answer from it, so any formatting or offset it applies leaves nothing in the word to find.</li>
+<li>Check what a test actually tests. Sending <code>Z/det</code> on a word with a prime determinant can't tell you anything new, because the group is cyclic anyway. One of my early H₁ tests did exactly that. Another round had the Smith normal form code quietly dropping zero entries (a 0 there means a free <code>Z</code>), so it sent <code>0</code>.</li>
+<li>"Already sent" isn't the same as "disproven". It's strong for plain integers, where there's really only one way to write the answer. It's weak for polynomials, vectors and group names, where there are dozens.</li>
+</ul>
+<h3 id="nothing-left">Nothing left<a class="headerlink" href="#nothing-left" title="Permanent link">&para;</a></h3>
+<p>Every idea on my list ended up sent and rejected, or ruled out as not worth a connection. Speed was never the problem. Sage answers the Markov trace, HOMFLY-PT and Dynnikov in milliseconds, and khoca does a true Khovanov rank in about a second. The problem is the format: with no feedback, a polynomial or a vector can be written down dozens of ways and only one is right.</p>
+<p>The one probe I ruled out without sending was spelling the unlink's trivial answer different ways (<code>[0]</code>, <code>unknot</code> and so on). It needs a word that closes to the unlink, about 9% of them, and none came up in about 12 minutes of trying. Plain <code>0</code> had already been rejected on unlink words anyway, and a server that only ever says nothing can't teach you a spelling.</p>
+<h3 id="where-its-at">Where it's at<a class="headerlink" href="#where-its-at" title="Permanent link">&para;</a></h3>
+<p>Still unsolved, and I don't know the answer. My best guess is that the missing piece is the answer format, or the answer depending on something other than <code>B4_GEN</code>. If the authors share their writeup I'll update this with the real solution.</p>
+<h2 id="flag">Flag<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h2>
+<div class="admonition failure">
+<p class="admonition-title">No flag (yet)</p>
+<p>Stage 3 wasn't solved by anyone during the event, and I'm still working on it.</p>
+</div>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Match your timeouts to the service before calling it dead. Stage 1's "unresponsive" server was just slower than my socket timeout.</li>
+<li>When an answer depends on random per-connection data, look at many samples together. The stage 2 encoding was invisible in one burst and obvious in thirteen.</li>
+<li>Log every live attempt with an ID and everything you sent. It caught an off-by-one that had silently invalidated a whole sweep.</li>
+<li>A zero-feedback oracle punishes guessing. Before spending a connection, ask whether the test can actually tell two ideas apart on <em>this</em> word.</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:scipy">
+<p>SciPy, <code>scipy.signal.chirp</code> (quadratic method, <code>vertex_zero</code>): <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.chirp.html">https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.chirp.html</a>&#160;<a class="footnote-backref" href="#fnref:scipy" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sage">
+<p>SageMath, Braid groups (<code>alexander_polynomial</code>, <code>jones_polynomial</code>, <code>left_normal_form</code>, <code>markov_trace</code>): <a href="https://doc.sagemath.org/html/en/reference/groups/sage/groups/braid.html">https://doc.sagemath.org/html/en/reference/groups/sage/groups/braid.html</a>&#160;<a class="footnote-backref" href="#fnref:sage" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:snappy">
+<p>SnapPy: <a href="https://snappy.computop.org/">https://snappy.computop.org/</a>&#160;<a class="footnote-backref" href="#fnref:snappy" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:hashcash">
+<p>Wikipedia, "Hashcash": <a href="https://en.wikipedia.org/wiki/Hashcash">https://en.wikipedia.org/wiki/Hashcash</a>&#160;<a class="footnote-backref" href="#fnref:hashcash" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:chirp">
+<p>Wikipedia, "Chirp": <a href="https://en.wikipedia.org/wiki/Chirp">https://en.wikipedia.org/wiki/Chirp</a>&#160;<a class="footnote-backref" href="#fnref:chirp" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:matched">
+<p>Wikipedia, "Matched filter": <a href="https://en.wikipedia.org/wiki/Matched_filter">https://en.wikipedia.org/wiki/Matched_filter</a>&#160;<a class="footnote-backref" href="#fnref:matched" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:braid">
+<p>Wikipedia, "Braid group" (Artin generators, closures and Alexander's theorem): <a href="https://en.wikipedia.org/wiki/Braid_group">https://en.wikipedia.org/wiki/Braid_group</a>&#160;<a class="footnote-backref" href="#fnref:braid" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:signature">
+<p>Wikipedia, "Signature of a knot": <a href="https://en.wikipedia.org/wiki/Signature_of_a_knot">https://en.wikipedia.org/wiki/Signature_of_a_knot</a>&#160;<a class="footnote-backref" href="#fnref:signature" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:khovanov">
+<p>Dror Bar-Natan, "On Khovanov's categorification of the Jones polynomial" (2002): <a href="https://arxiv.org/abs/math/0201043">https://arxiv.org/abs/math/0201043</a>&#160;<a class="footnote-backref" href="#fnref:khovanov" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sagelink">
+<p>SageMath, Links (<code>khovanov_homology</code>, <code>homfly_polynomial</code>, <code>signature</code>, <code>determinant</code>): <a href="https://doc.sagemath.org/html/en/reference/knots/sage/knots/link.html">https://doc.sagemath.org/html/en/reference/knots/sage/knots/link.html</a>&#160;<a class="footnote-backref" href="#fnref:sagelink" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:nt">
+<p>Wikipedia, "Nielsen-Thurston classification": <a href="https://en.wikipedia.org/wiki/Nielsen%E2%80%93Thurston_classification">https://en.wikipedia.org/wiki/Nielsen%E2%80%93Thurston_classification</a>&#160;<a class="footnote-backref" href="#fnref:nt" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ubw">
+<p>Kalmarunionen, "zer0pts CTF 2023 - Unlimited Braid Works": <a href="https://www.kalmarunionen.dk/writeups/2023/zer0pts/braid/">https://www.kalmarunionen.dk/writeups/2023/zer0pts/braid/</a>&#160;<a class="footnote-backref" href="#fnref:ubw" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../" class="md-footer__link md-footer__link--prev" aria-label="Previous: CSS CTF 2026: Return of Nexus">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                CSS CTF 2026: Return of Nexus
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../defcamp-2026/" class="md-footer__link md-footer__link--next" aria-label="Next: DefCamp CTF 2026">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                DefCamp CTF 2026
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../../javascripts/terminal.js"></script>
+      
+        <script src="../../../../javascripts/clipboard.js"></script>
+      
+        <script src="../../../../javascripts/ctf-filter.js"></script>
+      
+        <script src="../../../../javascripts/ctf-explorer.js"></script>
+      
+        <script src="../../../../javascripts/challenge-card.js"></script>
+      
+        <script src="../../../../javascripts/title-link.js"></script>
+      
+        <script src="../../../../javascripts/external-links.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
