@@ -77,8 +77,6 @@ def chain(x, steps):
 
 Hash `x` with SHA-256, `steps` times. Anyone can walk a chain forward. Walking it backward means inverting SHA-256, which nobody can do. That one-way-ness is what the whole attack plays with.
 
-The way I picture it: each chain is a staircase you can only climb up. Signing tells everyone which step you're standing on for each digit. Anyone can climb higher from there, but nobody can go back down.
-
 ### Winternitz one-time signatures (WOTS)
 
 The parameters: `N = 32` (SHA-256 output size), `W = 16` (so digits are 4 bits, 0 to 15), and `LEN = 67`. That 67 is `64 + 3`: the 256-bit message hash splits into 64 nibbles, plus 3 checksum digits.
@@ -109,7 +107,7 @@ def wots_pk_from_sig(msg, sig):
 
 ### Why the checksum exists
 
-If it were just the 64 message digits, forging would be easy. Every revealed value is `chain(sk_i, d_i)`, and since anyone can hash forward, I could bump any digit *up* for free. The checksum `c = sum(15 - d_i)` is there to stop that. Raise any message digit and the checksum drops, which pushes at least one checksum digit *down*, and going down a chain means inverting the hash. In staircase terms, the checksum stairs run the opposite way, so climbing up on the message side forces you down somewhere else. With one signature you can't forge a different message. That's the "one-time" guarantee.
+If it were just the 64 message digits, forging would be easy. Every revealed value is `chain(sk_i, d_i)`, and since anyone can hash forward, I could bump any digit *up* for free. The checksum `c = sum(15 - d_i)` is there to stop that. Raise any message digit and the checksum drops, which pushes at least one checksum digit *down*, and going down a chain means inverting the hash. With one signature you can't forge a different message. That's the "one-time" guarantee.
 
 ### The Merkle tree on top
 
@@ -135,7 +133,7 @@ The cryptography here is fine. The bug is that `/rollback` sets `self.ctr` back 
 
 ## The vulnerability: one key, many signatures
 
-The "one-time" safety depends on a leaf signing exactly one message. Sign a second message with the same leaf and the checksum stops helping, because now I can *choose* which of two revealed values to extend at each position. I've seen you standing on two different steps of every staircase, so I just start from whichever is lower.
+The "one-time" safety depends on a leaf signing exactly one message. Sign a second message with the same leaf and the checksum stops helping, because now I can *choose* which of two revealed values to extend at each position.
 
 At position `i`, if I have a signature for a message whose digit there is `s`, I hold `chain(sk_i, s)`. For any target digit `t >= s`, I can compute `chain(sk_i, t)` myself by hashing `(t - s)` more times. No secret needed, it's just more `chain()` on a value I already have. The only positions I can't reach are the ones where the target digit is *below* every digit I've seen, since that would mean walking a chain backward.
 
