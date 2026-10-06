@@ -8,9 +8,6 @@ ctf_meta:
 
 # CSS CTF 2026: Return of Nexus
 
-??? tip "Incomplete Writeups"
-    This page only covers the challenges I worked on. I may add more writeups later as time permits.
-
 | | |
 |---|---|
 | **Format** | Jeopardy |
