@@ -14,14 +14,16 @@ ctf_meta:
 | | |
 |---|---|
 | **Format** | Jeopardy |
-| **Organiser** | Cybersecurity Society Sydney |
+| **Organiser** | Cybersecurity Society Sydney (University of Sydney) |
 | **Dates** | 30 Sept, 14:00 AWST to 2 Oct 2026, 06:00 AWST |
 | **Team** | WillHackForBeer |
 | **Placement** | #25 (tied on score with first) |
 
 ## Overview
 
-Played CSS CTF with my team, WillHackForBeer. By the time I hopped on the team had cleared everything except three: the two blockchain challenges and Orthogonal Singularity. Those were mine. The blockchain ones went down, Orthogonal Singularity didn't, and neither did it for anyone else. That also explains the placement: the top 25 all solved everything except Orthogonal Singularity and finished on the same score, so the order came down to timing.
+Played with my team, WillHackForBeer. By the time I hopped on there were only 3 challenges left: the two blockchain ones and Orthogonal Singularity. I got both blockchain ones. Orthogonal Singularity went unsolved, by me and everyone else.
+
+We finished 25th. The top 25 teams all solved everything except Orthogonal Singularity and ended on the same score, so the order just came down to who got there first.
 
 ## Writeups
 
