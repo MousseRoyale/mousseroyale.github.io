@@ -9,16 +9,16 @@ ctf_meta:
 # H7CTF 2026 Quals
 
 ??? tip "Incomplete Writeups"
-    This page only covers my own solves from this event, not everything the team solved. I may add more writeups retroactively as time permits.
+    This page only covers my own solves from this event. I may add more writeups later as time permits.
 
 | | |
 |---|---|
 | **Dates** | 26 Sept, 11:30 AWST to 27 Sept 2026, 23:30 AWST |
-| **Team** | WillHackForBeer (currently #1 on CTFtime) |
+| **Team** | WillHackForBeer |
 
 ## Overview
 
-Played the H7CTF quals with WillHackForBeer. The writeups here are only the challenges I solved myself, so they're a slice of what the team got through rather than the full picture.
+Played the H7CTF quals with my team, WillHackForBeer. These are the challenges I solved.
 
 ## Writeups
 

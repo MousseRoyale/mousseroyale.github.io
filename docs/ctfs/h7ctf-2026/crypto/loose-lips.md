@@ -370,7 +370,7 @@ Once both flags were in, I tidied everything into one `solve.py`: the CKKS encod
 
 ## Notes
 
-- The giveaway for this whole class of bug is any keyed oracle that "returns the approximate/noisy result" at full precision. For CKKS that noisy output is a side channel on the key, not just on the data. The same smell shows up in differential privacy mechanisms that leak raw noisy values instead of properly calibrated or rounded ones.
+- If a CKKS service hands back the approximate (noisy) decryption at full precision, that noise is a side channel on the key, not just on the data.
 - When a "hardened" version adds a defence, check whether it protects each *query* or each *ciphertext*. Noise flooding without a query limit (or a fresh ciphertext per query) falls to plain averaging.
 - Measuring the noise from a handful of samples before committing to an attack saves a lot of guessing. 30 samples told me the flood was about 5, so I knew 3000 queries would do it before sending them.
 - On a live service, time one request before writing a loop that fires thousands of them. The naive sequential version would have been ~50 minutes, a thread pool with retry-on-5xx made it ~2.
